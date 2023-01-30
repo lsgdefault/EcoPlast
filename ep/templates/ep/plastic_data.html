@@ -1,0 +1,178 @@
+{% extends 'ep/base5.html' %}
+{% block content %}
+<section class="ls with_bottom_border">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <ol class="breadcrumb darklinks">
+                    <li>
+                        <a href="{% url 'collectorindex' pk=request.session.id %}">Dashboard</a>
+                    </li>
+                    <li>Account</li>
+                    <li class="active">Reports</li>
+                </ol>
+            </div>
+            <div class="col-md-6 text-md-right">
+                <span class="dashboard-daterangepicker">
+                    <i class="fa fa-calendar"></i>
+                    <span></span>
+                    <i class="caret"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+</section>
+{% load ep_extras %}
+
+			<section class="ls section_padding_100">
+				<div class="container">
+					
+					<div class="row">
+						<div class="col-sm-12">
+							<h1 class="divider_40">Plastic &nbsp; Selling &nbsp; Reports&nbsp; :</h1>
+						</div>
+					</div>
+                    <div class="row">
+						<div class="col-lg-3 col-sm-6">
+
+							<div class="teaser warning_bg_color counter-background-teaser text-center">
+								<span class="counter counter-background" data-from="0" data-to="{{count_r}}" data-speed="2100">0</span>
+								<h3 class="counter highlight" data-from="0" data-to="{{count_r}}" data-speed="2100">0</h3>
+								<p>Total Reports</p>
+							</div>
+
+						</div>
+
+						<div class="col-lg-3 col-sm-6">
+
+							<div class="teaser danger_bg_color counter-background-teaser text-center">
+								<span class="counter counter-background" data-from="0" data-to="{{totalcollection_r}}" data-speed="1500">0</span>
+								<h3 class="counter highlight" data-from="0" data-to="{{totalcollection_r}}" data-speed="1500">0</h3>
+								<p>Total Collection</p>
+							</div>
+
+						</div>
+
+						<div class="col-lg-3 col-sm-6">
+
+							<div class="teaser success_bg_color counter-background-teaser text-center">
+								<span class="counter counter-background" data-from="0" data-to="{{t_usage_r}}" data-speed="1900">0</span>
+								<h3 class="counter highlight" data-from="0" data-to="{{t_usage_r}}" data-speed="1900">0</h3>
+								<p>Total Usage</p>
+							</div>
+
+						</div>
+
+						<div class="col-lg-3 col-sm-6">
+
+							<div class="teaser info_bg_color counter-background-teaser text-center">
+								<span class="counter counter-background" data-from="0" data-to="{{t_waste_r}}" data-speed="1800">0</span>
+								<h3 class="counter-wrap highlight" data-from="0" data-to="{{t_waste_r}}" data-speed="1800">
+									<span class="counter" data-from="0" data-to="{{t_waste_r}}" data-speed="1500">0</span>
+								</h3>
+								<p>Total Wastage</p>
+							</div>
+
+						</div>
+					</div>
+                    <br><br>
+                    <form action="{% my_url report_r.number 'page' request.GET.urlencode %}" class="form-inline filters-form" method="GET">
+
+                    <input list="brow" name="pc_name" onchange="form.submit();" placeholder="Select Plastic Collector">
+							<datalist id="brow"  style="height: fit-content;">
+								<option value="All">All</option> 
+								{% for r in comp %}
+								<option value="{{r.comp_name}}">{{r.comp_name}}</option>
+								{% endfor %}
+							</datalist>&nbsp;
+                    <br><br>
+                    </form>
+                    <div class="row">
+                        
+						<table  class="table table-striped">
+							<thead>
+                                <tr>
+                                    <th>Sr. No.</th>
+                                    <th>Name</th>
+                                    <th>Total Collection</th>
+                                    <th>Usage</th>
+                                    <th>Wastage</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if report_r %}
+                                {% for i in report_r %}
+                                <tr>
+                                
+                                    <td>{{report_r.start_index|add:forloop.counter0 }}</td>
+                                    <td>{{i.rc_id.comp_name}}</td>
+                                    <td>{{i.total_collection}} KGs</td>
+                                    <td>{{i.usage}} KGs</td>
+                                    <td>{{i.wastage}} KGs</td>
+                                </tr>
+                                {% endfor %}
+                                {% else %}
+                               
+								<tr>
+									<td colspan="5"><center>No Records</center></td>
+								</tr>
+								
+
+                                {% endif %}
+                            </tbody>
+						</table>
+                    </div>
+                    <div class="row">
+						<div class="col-md-6">
+							
+							<ul class="pagination highlightlinks">
+							
+								{% if report_r.has_previous %}
+								<li>
+									<a href="{% my_url 1 'page' request.GET.urlencode %}">
+										<span>First</span>
+									</a>
+								</li>
+								<li class="text-md-left">
+									
+									<a href="{% my_url report_r.previous_page_number 'page' request.GET.urlencode %}">
+										<span class="sr-only">Prev</span>
+										<i class="fa fa-angle-left" aria-hidden="true"></i>
+									</a>
+									{% endif %}
+								</li>
+								
+								{% for c in total.page_range %}
+									{% if report_r.number == c %}
+										<li class="active"><span>{{ c }} <span class="sr-only">(current)</span></span></li>
+									{% elif c > report_r.number|add:'-3' and c < report_r.number|add:'3' %}
+										<li><a href="{% my_url c 'page' request.GET.urlencode %}" >{{ c }}</a></li>
+									{% endif %}
+								{% endfor %}
+								{% if report_r.has_next %}
+								<li>
+									<a href="{% my_url report_r.next_page_number 'page' request.GET.urlencode %}">
+										<span class="sr-only">Next</span>
+										<i class="fa fa-angle-right" aria-hidden="true"></i>
+									</a>
+								</li>	
+								<li>
+									<a href="{% my_url total.num_pages 'page' request.GET.urlencode %}">
+										<span>Last</span>
+									</a>
+								</li>
+								{% endif %}
+								
+							</ul>
+							
+						</div>
+						<div class="col-md-6 text-md-right">
+							Showing {{report_r.start_index}} to {{report_r.end_index}} of {{total.count}} items
+						</div>
+					</div>
+
+				</div>
+			</section>
+                
+
+{% endblock %}

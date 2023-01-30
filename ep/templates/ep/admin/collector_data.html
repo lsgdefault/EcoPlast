@@ -1,0 +1,82 @@
+{% extends 'ep/admin/base6.html' %}
+{% block content %}
+
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid">
+                        <h1 class="mt-4">Plastic Selling to Recycling Company</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                            <li class="breadcrumb-item">Reports</li>
+                            <li class="breadcrumb-item active">Plastic Collector Data</li>
+                        </ol>
+                        
+
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <form action="." class="form-inline filters-form" method="GET">
+                                    &nbsp;&nbsp;&nbsp;                                   
+                                   
+                                    <input list="brow" name="coll" placeholder="Select Collector">
+                                    <datalist id="brow"  style="height: fit-content;">
+                                        <option value="All">All</option> 
+                                        {% for p in plast %}
+                                        <option value="{{p.pc_name}}"></option>
+                                        {% endfor %}
+                                    </datalist> 
+                                    &nbsp;
+                                    Starting Date<input type="text" name="sdate" placeholder="YYYY-MM-DD" onfocus="(this.type='date')"onblur="(this.type='text')">
+                                    &nbsp;Ending Date<input type="text" name="edate" placeholder="YYYY-MM-DD" onfocus="(this.type='date')"onblur="(this.type='text')">
+                                    &nbsp;&nbsp;&nbsp;
+                                    <button>Search</button>
+                                    
+                                </form>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable"  width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>Sr. No.</th>
+                                                <th>Recycling Company</th>
+                                                <th>Plastic Collector</th>
+                                                <th>Collection Date</th>
+                                                <th>Total Collection</th>
+                                                <th>Total Wastage</th>
+                                                <th>Total Usage</th>
+                                                <th>Type of Plastic</th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        
+                                        
+                                        <tbody>
+                                            {% if plastic %}
+                                            {% for i in plastic %}
+                                            <tr>
+                                                <td>{{forloop.counter}}</td>
+                                                <td>{{i.rc_id.comp_name}} <br> &lt;{{i.rc_id.master_id.email}}&gt;</td>
+                                                <td>{{i.plastic_id.pc_name}} <br> &lt;{{i.plastic_id.master_id.email}}&gt; </td>
+                                                <td>{{i.collection_date|date:"Y-m-d"}}</td>
+                                                <td>{{i.total_collection}}</td>
+                                                <td>{{i.wastage}}</td>
+                                                <td>{{i.usage}}</td>
+                                                <td>{{i.types}}</td>
+                                               
+                                            </tr>
+                                            {% endfor %}   
+                                            {% else %} 
+                                            <tr>
+                                                <td colspan="7"><center>No Records</center> </td>
+                                            </tr>
+                                            {% endif %}
+                                        </tbody>
+                                    </table>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </main>
+{% endblock %}

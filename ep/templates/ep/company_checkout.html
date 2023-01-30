@@ -1,0 +1,201 @@
+{% extends 'ep/base2.html' %}
+{% block content %}
+<section class="ls with_bottom_border">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-6">
+				<ol class="breadcrumb darklinks">
+					<li>
+						<a href="{% url 'companyindex' %}">Dashboard</a>
+					</li>
+					<li>Requests</li>
+					<li> <a href="{% url 'rpallstatus' %}"> Plastic Requests </a></li>
+					<li class="active">Checkout</li>
+				</ol>
+			</div>
+			<div class="col-md-6 text-md-right">
+				<span class="dashboard-daterangepicker">
+					<i class="fa fa-calendar"></i>
+					<span></span>
+					<i class="caret"></i>
+				</span>
+			</div>
+		</div>
+	</div>
+</section>
+
+			<section class="ls section_padding_top_100 section_padding_bottom_75 columns_padding_25">
+				<div class="container">
+
+					<div class="row">
+
+						<div class="col-sm-7 col-md-8 col-lg-9 col-sm-push-5 col-md-push-4 col-lg-push-3">
+
+							
+
+							<h2>Billing Address</h2>
+{% if key27 %}  
+							<form class="form-horizontal checkout shop-checkout" role="form">
+								<div class="form-group validate-required" id="billing_first_name_field">
+									<label for="billing_first_name" class="col-sm-3 control-label">
+										<span class="grey">Company Name:</span>
+										<span class="required">*</span>
+									</label>
+									<div class="col-sm-9">
+                                        {{key27.comp_name}}
+									</div>
+								</div>
+
+								<div class="form-group address-field validate-required" id="billing_address_fields">
+									<label for="billing_address_1" class="col-sm-3 control-label">
+										<span class="grey">Address:</span>
+										<span class="required">*</span>
+									</label>
+									<div class="col-sm-9">
+                                        {{key27.comp_address}}
+									</div>
+								</div>
+								<div class="form-group address-field validate-required" id="billing_city_field">
+									<label for="billing_city" class="col-sm-3 control-label">
+										<span class="grey">Town / City:</span>
+										<span class="required">*</span>
+									</label>
+									<div class="col-sm-9">
+                                        {{key27.comp_city}}
+									</div>
+								</div>
+								<div class="form-group address-field validate-state" id="billing_state_field">
+									<label for="billing_state" class="col-sm-3 control-label">
+										<span class="grey">State:</span>
+									</label>
+									<div class="col-sm-9">
+                                        {{key27.comp_state}}
+									</div>
+								</div>
+								<div class="form-group address-field validate-required validate-postcode" id="billing_postcode_field">
+									<label for="billing_postcode" class="col-sm-3 control-label">
+										<span class="grey">Postcode:</span>
+										<span class="required">*</span>
+									</label>
+									<div class="col-sm-9">
+                                        {{key27.comp_postalcode}}
+
+									</div>
+								</div>
+
+								<div class="form-group validate-required validate-email" id="billing_email_field">
+									<label for="billing_email" class="col-sm-3 control-label">
+										<span class="grey">Email Address:</span>
+										<span class="required">*</span>
+									</label>
+									<div class="col-sm-9">
+                                        {{request.session.email}}
+									</div>
+								</div>
+								<div class="form-group validate-required validate-phone" id="billing_phone_field">
+									<label for="billing_phone" class="col-sm-3 control-label">
+										<span class="grey">Phone:</span>
+										<span class="required">*</span>
+									</label>
+									<div class="col-sm-9">
+                                        {{key27.comp_contact}}
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-offset-3 col-sm-9">
+										<div class="checkbox">
+											<label>
+												<input type="checkbox"> Shop to Billing Address?
+											</label>
+										</div>
+									</div>
+								</div>
+
+
+								<div class="form-group">
+									<label for="order_comments" class="col-sm-3 control-label">
+										<span class="grey">Order Notes:</span>
+									</label>
+									<div class="col-sm-9">
+										<textarea name="order_comments" class="form-control" id="order_comments" placeholder="" rows="5"></textarea>
+									</div>
+								</div>
+							</form>
+
+						</div>
+{% endif %}
+						<aside class="col-sm-5 col-md-4 col-lg-3 col-sm-pull-7 col-md-pull-8 col-lg-pull-9">
+{% if key26 %}  
+							<h3 class="widget-title" id="order_review_heading">Your order</h3>
+							<div id="order_review" class="shop-checkout-review-order">
+								<table class="table shop_table shop-checkout-review-order-table">
+									<thead>
+										<tr>
+											<td class="product-name">Product</td>
+											<td class="product-total">Total</td>
+										</tr>
+									</thead>
+									<tbody>
+                                        
+										<tr class="cart_item">
+											<td class="product-name">
+												{{key26.pproduct_id.pproduct_name}}
+												<span class="product-quantity">× {{key26.request_quantity}}</span><br> 
+											<p class="price">
+												₹<span class="amount">{{key26.pproduct_id.pproduct_price}}</span>
+
+												
+											</p>
+											</td>
+											<td class="product-total">
+												<span class="amount grey">{{total}}</span>
+											</td>
+										</tr>
+                                        
+									</tbody>
+									<tfoot>
+
+										<tr class="cart-subtotal">
+											<td>Subtotal:</td>
+											<td>
+												<span class="amount grey">₹{{total}}</span>
+											</td>
+										</tr>
+
+										<tr class="shipping">
+											<td>Shipping:</td>
+											<td>
+												<span class="grey">Free Shipping</span>
+											</td>
+										</tr>
+
+										<tr class="order-total">
+											<td>Total:</td>
+											<td>
+												<span class="amount grey">
+													<strong>₹{{total}}</strong>
+												</span>
+											</td>
+										</tr>
+									</tfoot>
+    
+								</table>
+								<form action="{% url 'pay' %}" method="post">
+									{% csrf_token %}
+									
+									<input type="hidden" name="comp" value="{{key26.id}}">
+									
+									<input type="hidden" name="total" value="{{total}}"><br>
+									<button class="theme_button color1">checkout</button>
+								</form>
+
+
+					
+							</div>
+
+						</aside>
+					</div>
+				</div>
+			</section>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,80 @@
+{% extends 'ep/admin/base6.html' %}
+{% block content %}
+
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid">
+                        <h1 class="mt-4">Recycled Products Selling  to Customer</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                            <li class="breadcrumb-item">Reports</li>
+                            <li class="breadcrumb-item active">Recycling Company Data </li>
+                        </ol>
+                        
+
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <form action="." class="form-inline filters-form" method="GET">
+                                    &nbsp;&nbsp;&nbsp;                                   
+                                   
+                                    <input list="brow" name="rc" placeholder="Select Company">
+                                    <datalist id="brow"  style="height: fit-content;">
+                                        <option value="All">All</option> 
+                                        {% for p in rc %}
+                                        <option value="{{p.comp_name}}"></option>
+                                        {% endfor %}
+                                    </datalist> 
+                                    &nbsp;
+                                    Starting Date<input type="text" name="sdate" placeholder="YYYY-MM-DD" onfocus="(this.type='date')"onblur="(this.type='text')">
+                                    &nbsp;Ending Date<input type="text" name="edate" placeholder="YYYY-MM-DD" onfocus="(this.type='date')"onblur="(this.type='text')">
+                                    &nbsp;&nbsp;&nbsp;
+                                    <button>Search</button>
+                                    
+                                </form>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable"  width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>            
+                                                <th>Sr. No.</th>
+                                                <th>Recycling Company</th>
+                                                <th>Customer</th>
+                                                <th>Product</th>
+                                                <th>Price</th>
+                                                <th>Quantity</th>
+                                                <th>Date</th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        
+                                        
+                                        <tbody>
+                                            {% if company %}
+                                            {% for i in company %}
+                                            <tr>
+                                                <td>{{forloop.counter}}</td>
+                                                <td>{{i.company_id.comp_name}} <br> &lt;{{i.company_id.master_id.email}}&gt;</td>
+                                                <td>{{i.cust_id.fname}} {{i.cust_id.lname}}<br> &lt;{{i.cust_id.master_id.email}}&gt;</td>
+                                                <td>{{i.rp_id.rproduct_name}}</td>
+                                                <td>{{i.cart_price}}</td>
+                                                <td>{{i.cart_quantity}}</td>
+                                                <td>{{i.order_date|date:"Y-m-d"}}</td>
+                                               
+                                            </tr>
+                                            {% endfor %}   
+                                            {% else %} 
+                                            <tr>
+                                                <td colspan="7"><center>No Records</center> </td>
+                                            </tr>
+                                            {% endif %}
+                                        </tbody>
+                                    </table>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </main>
+{% endblock %}

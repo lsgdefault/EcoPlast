@@ -1,0 +1,106 @@
+{% extends 'ep/base3.html' %}
+{% block content %}
+			<section class="page_breadcrumbs ds parallax section_padding_top_65 section_padding_bottom_65">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-12 text-center">
+							<h2 class="highlight">Single Product</h2>
+							<ol class="breadcrumb darklinks">
+								<li>
+									<a href="{% url 'index2' %}">
+							Home
+						</a>
+								</li>
+								<li>
+									<a href="{% url 'showpro' %}">Shop</a>
+								</li>
+								<li class="active">Product Details</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+			</section>
+{% if key17 %}
+			<section class="ls section_padding_top_100 section_padding_bottom_75 columns_padding_25">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-12">
+							<h2 class="divider_40">Product &nbsp; Details :</h2>
+						</div>
+					</div>
+					<div class="row">
+						
+						<div class="">
+
+							<div class="with_background with_padding rounded">
+
+
+								<div itemscope="" itemtype="http://schema.org/Product" class="product type-product row">
+
+									<div class="col-sm-6">
+										<div class="images">
+
+											<center><br><br><br>
+											<a href="" itemprop="image" class="woocommerce-main-image zoom" data-rel="prettyPhoto[product-gallery]">
+												<img src="{{MEDIA_URL}}{{ key17.rproduct_image.url }}" class="attachment-shop_single wp-post-image" alt="{{post.title}}" title="">
+											</a>
+										</center>
+										</div>
+										
+									</div>
+
+									<div class="summary entry-summary col-sm-6">
+
+										<h1 itemprop="name" class="product_title entry-title">Item Title: {{key17.rproduct_name}}</h1>
+
+										<div itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
+
+											<div itemprop="description">
+												<p>{{key17.rproduct_desc}}</p>
+											</div>
+
+											<ul class="list1 no-bullets">
+												<li>
+													<p class="price">
+														
+										<ins>
+											₹<span class="amount">{{key17.rproduct_price}}</span>
+										</ins>
+									</p>
+
+													<meta itemprop="price" content="2">
+
+													<meta itemprop="priceCurrency" content="USD">
+
+													<link itemprop="availability" href="https://schema.org/InStock">
+													<p class="stock"><span class="grey">Availability:</span> 
+														{% if key17.rproduct_quantity <= 0 %}
+														<span style="color: red;">Out of Stock! </span>
+														
+														{% elif key17.rproduct_quantity >= 1 and key17.rproduct_quantity <= 5 %}
+															<span style="color: red;">Hurry-UP! Only Few Left. </span>
+
+														{% else %}
+															In Stock
+														{% endif %}
+													</p>
+
+													<div class="email-to darklinks">
+														
+													</div>
+												</li>
+											</ul>
+
+										</div>
+
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</section>
+{% endif %}
+{% endblock %}

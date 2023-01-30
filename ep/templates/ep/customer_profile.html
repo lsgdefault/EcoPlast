@@ -1,0 +1,276 @@
+{% extends 'ep/base3.html' %}
+{% block content %}
+
+<section class="page_breadcrumbs ds parallax section_padding_top_65 section_padding_bottom_65">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12 text-center">
+				<h2 class="highlight">{{request.session.Firstname}} {{request.session.Lastname}}</h2>
+				<ol class="breadcrumb darklinks">
+					<li>
+						<a href="{% url 'index2' %}">
+				Home
+			</a>
+					</li>
+					
+					<li class="active">My Profile</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+</section>
+
+			<section class="ls section_padding_top_50 section_padding_bottom_50 columns_padding_10">
+				<div class="container-fluid">
+
+					<div class="row">
+						<div class="media">
+							</div>
+						<div class="col-sm-12">
+							<h3>{{key3.fname}}
+								{{key3.lname}}
+								<small>
+									<a href="{% url 'updatebutton' pk=request.session.id %}"><i class="fa fa-edit"></i> </a>
+								</small>
+							</h3>
+							
+						</div>
+					</div>
+					<div class="row"></div>
+
+						<div class="col-md-9">
+
+
+							{% if key3	%}
+							
+
+							<div class="row">
+								
+								<div class="col-xs-12 col-md-6">
+									<div class="with_border with_padding">
+										<h4>
+											Information
+										</h4>
+
+										<ul class="list1 no-bullets">
+											<li>
+												<div class="media small-teaser">
+													<div class="media-left media-middle">
+														<div class="teaser_icon label-info round fontsize_16">
+															<i class="fa fa-briefcase"></i>
+														</div>
+													</div>
+													<div class="media-body media-middle">
+														<strong class="grey">
+															Email Address:
+														</strong>
+														{{request.session.email}}
+													</div>
+												</div>
+											</li>
+											<li>
+												<div class="media small-teaser">
+													<div class="media-left media-middle">
+														<div class="teaser_icon label-success round fontsize_16">
+															<i class="fa fa-flag"></i>
+														</div>
+													</div>
+													<div class="media-body media-middle">
+														<strong class="grey">
+															Gender:
+														</strong>
+														{{key3.gender}}
+													</div>
+												</div>
+											</li>
+											
+											<li>
+												<div class="media small-teaser">
+													<div class="media-left media-middle">
+														<div class="teaser_icon label-warning round fontsize_16">
+															<i class="fa fa-map-marker"></i>
+														</div>
+													</div>
+													
+													<div class="media-body media-middle">
+														
+														<strong class="grey">
+															Address:
+														</strong>
+														{{key3.address}}, {{key3.city}}, {{key3.state}}, {{key3.postalcode}}
+													
+													</div>	
+												</div>
+											</li>
+						
+											<li>
+												<div class="media small-teaser">
+													<div class="media-left media-middle">
+														<div class="teaser_icon label-success round fontsize_16">
+															<i class="fa fa-phone"></i>
+														</div>
+													</div>
+													<div class="media-body media-middle">
+														<strong class="grey">
+															Contact:
+														</strong>
+														{{key3.contact}}
+													</div>
+												</div>
+											</li>
+											
+										</ul>
+									</div>
+								</div>
+								<div class="col-xs-12 col-md-6">
+									<div class="with_border with_padding">
+										<h4>
+											User Statistics
+										</h4>
+
+										<ul class="list1 no-bullets">
+											<li>
+												<div class="media small-teaser">
+													<div class="media-left media-middle">
+														<div class="teaser_icon label-success fontsize_16">
+															<i class="fa fa-comments"></i>
+														</div>
+													</div>
+													<div class="media-body media-middle">
+														<strong class="grey">
+															Comments:
+														</strong>
+														0
+													</div>
+												</div>
+											</li>
+											
+											<li>
+												<div class="media small-teaser">
+													<div class="media-left media-middle">
+														<div class="teaser_icon label-info fontsize_16">
+															<i class="fa fa-calendar"></i>
+														</div>
+													</div>
+													<div class="media-body media-middle">
+														<strong class="grey">
+															Member since:
+														</strong>
+														{{key3.master_id.is_created}}
+													</div>
+												</div>
+											</li>
+											<li>
+												<div class="media small-teaser">
+													<div class="media-left media-middle">
+														<div class="teaser_icon label-warning fontsize_16">
+															<i class="fa fa-bolt"></i>
+														</div>
+													</div>
+													<div class="media-body media-middle">
+														<strong class="grey">
+															Last activity:
+														</strong>
+														52 mins ago
+													</div>
+												</div>
+											</li>
+
+										</ul>
+
+									</div>
+								</div>
+							</div>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="page_copyright ds darkblue_bg_color">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-sm-6">
+							<p class="grey">&copy; Copyrights 2017</p>
+						</div>
+						<div class="col-sm-6 text-sm-right">
+							<p class="grey">Last account activity <i class="fa fa-clock-o"></i> 52 mins ago</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+		</div>
+	</div>
+	<div class="side-dropdown side-chat dropdown">
+		<a class="side-button side-chat-button" id="chat-dropdown" data-target="#" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+			<i class="fa fa-comments-o"></i>
+		</a>
+
+		<ul class="dropdown-menu list-unstyled" aria-labelledby="chat-dropdown">
+			<li class="dropdown-title darkgrey_bg_color">
+				<h4>
+					Small Chat
+					<span class="pull-right">14.03.2017</span>
+				</h4>
+			</li>
+			<li>
+
+				<ul class="list-unstyled">
+					<li class="side-chat-item item-secondary">
+						<h5>
+							Michael Anderson
+							<time class="pull-right small-chat-date" datetime="2017-03-13T08:50:40+00:00">
+								08:50
+							</time>
+						</h5>
+						<div class="danger_bg_color">
+							Duis autem veum iriure dolor in hendrerit
+						</div>
+					</li>
+					<li class="side-chat-item item-primary">
+						<h5>
+							Jane Walker
+							<time class="pull-right small-chat-date" datetime="2017-03-13T08:50:40+00:00">
+								08:52
+							</time>
+						</h5>
+						<div class="warning_bg_color">
+							Vulputate vese molestie consequatl illum
+						</div>
+					</li>
+					<li class="side-chat-item item-secondary">
+						<h5>
+							Michael Anderson
+							<time class="pull-right small-chat-date" datetime="2017-03-13T08:50:40+00:00">
+								08:50
+							</time>
+						</h5>
+						<div class="danger_bg_color">
+							Duis autem veum iriure dolor in hendrerit
+						</div>
+					</li>
+				</ul>
+			</li>
+
+
+			<li role="separator" class="divider"></li>
+
+			<li>
+				<div class="side-chat-answer">
+					<form class="form-inline button-on-input">
+						<div class="form-group">
+							<label for="side-chat-message" class="sr-only">Message</label>
+							<input type="text" class="form-control" id="side-chat-message" placeholder="Message">
+						</div>
+						<button type="submit" class="btn btn-danger">
+							<i class="fa fa-paper-plane-o"></i>
+						</button>
+					</form>
+				</div>
+			</li>
+		</ul>
+	</div>
+
+
+{% endblock %}

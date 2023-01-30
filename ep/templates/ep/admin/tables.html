@@ -1,0 +1,68 @@
+{% extends 'ep/admin/base6.html' %}
+{% block content %}
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid">
+                        <h1 class="mt-4">All Users</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                            <li class="breadcrumb-item active">User Table</li>
+                        </ol>
+                        
+{% if key18 %}
+                        <div class="card mb-4">
+                            
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable"  width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Role</th>
+                                                <th>Email</th>
+                                                <th>Verified</th>
+                                                <th>Active</th>
+                                                <th>Created</th>
+                                                <th>Last Updated</th>
+                                                <th>Update</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Role</th>
+                                                <th>Email</th>
+                                                <th>Verified</th>
+                                                <th>Active</th>
+                                                <th>Created</th>
+                                                <th>Last Updated</th>
+                                                <th>Update</th>
+                                            </tr>
+                                        </tfoot>
+                                        
+                                        <tbody>
+                                            {% for i in key18 %}
+                                            <tr>
+                                                <td>{{i.id}}</td>
+                                                <td>{{i.role}}</td>
+                                                <td>{{i.email}}</td>
+                                                <td>{{i.is_verified}}</td>
+                                                <td>{{i.is_active}}</td>
+                                                <td>{{i.is_created}}</td>
+                                                <td>{{i.is_updated}}</td>
+                                                <form action="{% url 'adminbutton' pk=i.id %}" method="post">
+                                                    {% csrf_token %}
+                                                    <td><button class="btn btn-primary" >Update</button></td>
+                                                </form>
+                                            </tr>
+                                            {% endfor %}    
+                                        </tbody>
+                                    </table>
+                                    
+                                </div>
+                            </div>
+                        </div>
+{% endif %}
+                    </div>
+                </main>
+{% endblock %}

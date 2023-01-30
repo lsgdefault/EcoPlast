@@ -1,0 +1,143 @@
+{% extends 'ep/base2.html' %}
+{% block content %}
+            <section class="ls with_bottom_border">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ol class="breadcrumb darklinks">
+                                <li>
+                                    <a href="{% url 'companyindex' %}">Dashboard</a>
+                                </li>
+                                <li>Data</li>
+                                <li class="active">Add Plastic Report</li>
+                            </ol>
+                        </div>
+                        <div class="col-md-6 text-md-right">
+                            <span class="dashboard-daterangepicker">
+                                <i class="fa fa-calendar"></i>
+                                <span></span>
+                                <i class="caret"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+			<section class="ls section_padding_top_100 section_padding_bottom_100">
+				<div class="container">
+                    {% if msg %}
+                    <div class="alert alert-success" role="alert">
+                        <button type="button" class="close" data-dismiss="alert">
+                            <span aria-hidden="true">×</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        <strong>{{msg}}</strong>
+                    </div>
+                    {% endif %}
+					<div class="row">
+						
+                        {% if error %}
+                        <div class="alert alert-warning" role="alert">
+                            <button type="button" class="close" data-dismiss="alert">
+                                <span aria-hidden="true">×</span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                            <strong>{{error}}</strong>
+                        </div>
+                        {% endif %}
+						<form action="{% url 'adddata' %}" method="POST">
+							{% csrf_token %}
+
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label for="billing_country" class="control-label">
+										<span class="grey">Plastic Collector Name:</span>
+										<span class="required">*</span>
+									</label>
+
+								
+                                    <input list="brow" class="form-control" name ="rc_id" style="height: 50px;" placeholder="Select...">
+									<datalist id="brow"  style="height: fit-content;">
+										{% for i in rc %}
+										<option value="{{i.pc_name}}">{{i.pc_name}}</option>
+                                        {% endfor %}
+									</datalist>
+								</div>
+
+								<div class="form-group" id="billing_company_field">
+									
+                                    <label for="billing_last_name" class="control-label">
+										<span class="grey">Useable:</span>
+										<span class="required">*</span>
+									</label>
+
+									<input type="text" name="usage" class="form-control" placeholder="Total Plastic Useable" value="">(in KGs) 
+								</div>
+								
+							</div>
+
+							<div class="col-sm-6">
+
+								<div class="form-group validate-required">
+									
+                                    <label for="billing_country" class="control-label">
+                                        <span class="grey">Type of Plastic:</span>
+                                        <span class="required">*</span>
+                                    </label>
+                                    <select class="form-control"style="height: 50px; width: 400px" name ="types" id="billing_country">
+                                        <option value="">Select...</option>
+                                        
+                                        <option>PET/Polyethylene Terephthalate</option>
+                                        <option>HDPE/High-Density Polyethylene</option>
+                                        <option>PVC/Polyvinyl Chloride</option>
+                                        <option>LDPE/Low-Density Polyethylene</option>
+                                        <option>PP/Polypropylene</option>
+                                        <option>PS/Polystyrene</option>
+                                        <option>Others</option>
+                                        
+                                    </select>
+								</div>
+
+								<div class="form-group validate-required">
+									<label for="billing_last_name" class="control-label">
+										<span class="grey">Wastage:</span>
+										<span class="required">*</span>
+									</label>
+
+									<input type="text" name="wastage" class="form-control" placeholder="Total Wasted Plastic" value="">(in KGs)
+
+								</div>
+                                
+
+                                
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group validate-required">
+							<label class="control-label">
+                                <span class="grey">Total Collection:</span>
+								<span class="required">*</span>
+							</label>
+
+                            <input type="number" name="totalcollect"class="form-control" placeholder="Total Plastic Collected" value="">(in KGs)
+						</div>
+						
+					</div>	
+                    <div class="col-sm-6">
+                        <label class="control-label">
+                            <span class="grey">Date of Collection:</span>
+
+                        </label>
+                        <input type="date" name="date_coll" class="form-control" placeholder="" value="">
+
+                        </div>
+                        
+				
+				</div>
+                <center>
+                    <button type="submit" class="theme_button wide_button color1 topmargin_40">Register Now</button>
+                    <button type="reset" class="theme_button wide_button">Clear Form</button>
+                </center>
+            </form> 
+			</section>
+{% endblock %}

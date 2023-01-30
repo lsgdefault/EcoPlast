@@ -1,0 +1,162 @@
+{% extends 'ep/base5.html' %}
+{% block content %}
+
+<section class="ls with_bottom_border" >
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <ol class="breadcrumb darklinks" >
+                    <li>
+                        <a href="#">Dashboard</a>
+                    </li>
+                    
+                    <li class="active">Orders</li>
+                </ol>
+            </div>
+            <!-- .col-* -->
+            <div class="col-md-6 text-md-right">
+                <span class="dashboard-daterangepicker">
+                    <i class="fa fa-calendar"></i>
+                    <span></span>
+                    <i class="caret"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+</section>
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid">
+                        <h3>Orders</h3>
+
+            
+                       
+{% load ep_extras %}            
+    
+    <div class="widget widget_search">
+        <form method="GET" action="{% my_url order.number 'page' request.GET.urlencode %}">
+            <div class="widget widget_search" >
+                <form method="GET" action="{% my_url key13.number 'page' request.GET.urlencode %}">
+                    <input list="brow" name="name" onchange="form.submit();" style="width: 190px; float: left;height: 50px;" placeholder="Select Customer Name">
+                                    <datalist id="brow"  style="height: fit-content; width: fit-content;">
+                                        <option value="" selected disabled>Select Status</option>
+                                        <option value="{{comp.comp_id.comp_name}}"></option>
+                         
+                                        
+                                        
+                                    </datalist>
+                                    
+                                    <div class="form-group">
+                                        <label class="sr-only" for="widget-search">Search for:</label>
+                                        <input id="widget-search" type="text" style="width: auto; float: right;" value="" name="search" class="form-control" placeholder="Search Keyword">
+                                    </div>
+                                    <button type="submit" class="theme_button color1">Search</button>
+        </form>
+    </div>
+    <br>
+                            <div class="card mb-4"> 
+                                
+                                <div class="card-body" >
+                                    <div class="table-responsive">
+                                        
+                                        <table class="table table-striped table-bordered text-center w-100"  width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Sr. No.</th>
+                                                    <th>Company Name</th>
+                                                    <th>Order(Product ID)</th>
+                                                    <th>Order Date</th>
+                                                    <th>Order Status</th>
+                                                    <th>Total</th>
+                                                    <th>Transcation ID</th>
+                                                </tr>
+                                            </thead>
+                                            
+                                            <tbody>
+                                                {% if order %}
+                                                {% for i in order %}
+                                                
+                                                
+                                                <tr>
+                                                    <td>{{forloop.counter}}</td>
+                                                    <td>{{i.comp_id.comp_name}}<br>&lt;{{i.comp_id.master_id.email}}&gt;</td>
+                                                    <td><a href="{% url 'odetails' pk=i.id %}" style="color:#54be73;">
+                                                        {{i.pproduct_id.pproduct_name}}({{i.id}})
+                                                    </a></td>
+                                                    <td>{{i.request_date | date:'Y-m-d H:i'}}</td>
+                                                    <td>{{i.status }}</td>
+                                                    <td>{{i.total_price}}</td>
+                                                    <td>{{i.transaction_id.id}}</td>
+                                                </tr>
+                                                
+                                                {% endfor %}
+                                                {% else %} 
+                                                <tr>
+                                                    <td colspan="6">No Records</td>
+                                                </tr>
+                                                {% endif %}
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </main>   
+            </div>
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-md-1 text-md-right">
+                <ul class="pagination highlightlinks">
+                    {% if order.has_previous %}
+                    <li>
+                        <a href="{% my_url 1 'page' request.GET.urlencode %}">
+                            <span>First</span>
+                        </a>
+                    </li>
+                    <li class="text-md-left">
+                        
+                        <a href="{% my_url order.previous_page_number 'page' request.GET.urlencode %}">
+                            <span class="sr-only">Prev</span>
+                            <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        </a>
+                        {% endif %}
+                    </li>
+                    
+                    
+                    {% for c in count.page_range %}
+                        {% if order.number == c %}
+                            <li class="active"><span>{{ c }} <span class="sr-only">(current)</span></span></li>
+                            {% elif c > order.number|add:'-3' and c < order.number|add:'3' %}
+                            <li><a href="{% my_url c 'page' request.GET.urlencode %}" >{{ c }}</a></li>
+                            {% endif %}
+                    {% endfor %}
+                    {% if order.has_next %}
+                    <li>
+                        <a href="{% my_url order.next_page_number 'page' request.GET.urlencode %}">
+                            <span class="sr-only">Next</span>
+                            <i class="fa fa-angle-right" aria-hidden="true"></i>
+                        </a>
+                    </li>	
+                    <li>
+                        <a href="{% my_url page.num_pages 'page' request.GET.urlencode %}">
+                            <span>Last</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                    
+                    
+                </ul>
+                
+            </div>
+            <div class="col-md-10 text-md-right">
+                Showing {{order.start_index}} to {{order.end_index}} of {{count.count}} items
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

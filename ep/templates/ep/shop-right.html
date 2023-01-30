@@ -1,0 +1,174 @@
+{% extends 'ep/base3.html' %}
+{% load static %}
+{% block content %}
+{% load ep_extras %}
+			<section class="page_breadcrumbs ds parallax section_padding_top_65 section_padding_bottom_65">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-12 text-center">
+							<h2 class="highlight">Products</h2>
+							<ol class="breadcrumb darklinks">
+								<li>
+									<a href="{% url 'index2' %}">
+							Home
+						</a>
+								</li>
+								<li>
+									<a href="#">Shop</a>
+								</li>
+								<li class="active">Products</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+			</section>
+{% if key15 %}
+			<section class="ls section_padding_top_100 section_padding_bottom_100 columns_padding_25">
+				<div class="container">
+					<div class="row">
+
+						<div class="col-sm-12">
+
+							<div class="shop-sorting">									
+									{% if msg %}
+											
+									<div class="alert alert-success" role="alert">
+										<button type="button" class="close" data-dismiss="alert">
+											<span aria-hidden="true">×</span>
+											<span class="sr-only">Close</span>
+										</button>
+										<strong>{{error}}</strong>
+									</div>>
+								
+									{% endif %}
+									
+										<div class="widget widget_search">
+											<form method="GET" action="{% my_url key13.number 'page' request.GET.urlencode %}">
+												<select onchange="form.submit();" name="sort" style="width: auto; float: left;height: 50px;">
+													<option value="" disabled selected>Sort by Price</option>
+													<option value="">Default</option>
+													<option value="lth">Low to High</option>
+													<option value="htl">High to Low</option>
+												</select>
+													<div class="form-group">
+														<input id="widget-search" type="text" style="width: auto; float: right;" name="search"  placeholder="Search">
+													</div>
+													<button type="submit" class="theme_button color1">Search</button>
+						
+												</form>
+											</div>
+								
+							</div>
+								
+								
+											
+
+						</div>
+						{% for i in key15 %}
+						
+						<table class="table_template">
+							<tbody>
+								<tr>
+									<td></td><td></td><td></td>
+									<td  style="max-width: 175px;;">	
+										<img src="{{MEDIA_URL}}{{ i.rproduct_image.url }}" alt="{{post.title}}" width="50%" height="50%">
+									</td>
+									<td></td>
+									<td>
+										<b style="font-size: 20px;"><a href="{% url 'prodesc' pk=i.id %}">{{i.rproduct_name}}</a>
+															
+											<span style="color: limegreen;" class="amount">₹{{i.rproduct_price}}</span></b>
+											{% if i.rproduct_quantity <= 0 %}
+											<form  method="post">
+												{% csrf_token %}
+												<button class="" disabled  style="padding: 10px 10px; background-color:transparent; border: 0ch; color: red;">Out of Stock</button>		
+											<span style="color: white; background-color: transparent; " >	Enter Quantity </span>
+												<input type="number" min="1" disabled max="{{i.rproduct_quantity}}"class="product-quantity"  style="background-color: transparent;" name="product_quantity">
+												<input type="hidden" name="atcprice" value="{{i.rproduct_price}}">
+												<input type="hidden" name="pid" value="{{i.id}}">
+											</form>	
+											{% elif i.rproduct_quantity >= 1 and i.rproduct_quantity <= 5 %}
+											<small style="color: red;">Hurry-UP! Only Few Left. </small>
+											<form action="{% url 'addtocart' %}" method="post">
+												{% csrf_token %}
+												
+												Enter Quantity 
+												<input type="number" min="1" max="{{i.rproduct_quantity}}"class="product-quantity"  style="background:lightcyan;" name="product_quantity">
+												<input type="hidden" name="atcprice" value="{{i.rproduct_price}}">
+												<input type="hidden" name="pid" value="{{i.id}}">
+												<button class="theme_button color1"  style="padding: 10px 10px;">Add to Cart</button>		
+											</form>	
+											{% else %}
+											<form action="{% url 'addtocart' %}" method="post">
+												{% csrf_token %}
+												
+												Enter Quantity 
+												<input type="number" min="1" max="{{i.rproduct_quantity}}"class="product-quantity"  style="background:lightcyan;" name="product_quantity">
+												<input type="hidden" name="atcprice" value="{{i.rproduct_price}}">
+												<input type="hidden" name="pid" value="{{i.id}}">
+												<button class="theme_button color1"  style="padding: 10px 10px;">Add to Cart</button>		
+											</form>	
+										{% endif %}
+									</td>
+								</tr>
+							</tbody>
+						</table>
+				
+						
+						{% endfor %}
+							
+{% endif %}
+							<div class="row">
+								<div class="col-sm-12 text-center">
+									<ul class="pagination highlightlinks">
+										{% if key15.has_previous %}
+										<li>
+											<a href="{% my_url 1 'page' request.GET.urlencode %}">
+												<span>First</span>
+											</a>
+										</li>
+										<li class="text-md-left">
+											
+											<a href="{% my_url key15.previous_page_number 'page' request.GET.urlencode %}">
+												<span class="sr-only">Prev</span>
+												<i class="fa fa-angle-left" aria-hidden="true"></i>
+											</a>
+											{% endif %}
+										</li>
+										
+
+										{% for c in page.page_range %}
+											{% if key15.number == c %}
+												<li class="active"><span>{{ c }} <span class="sr-only">(current)</span></span></li>
+											{% elif c > key15.number|add:'-3' and c < key15.number|add:'3' %}
+												<li><a href="{% my_url c 'page' request.GET.urlencode %}" >{{ c }}</a></li>
+											{% endif %}
+										{% endfor %}
+										{% if key15.has_next %}
+										<li>
+											<a href="{% my_url key15.next_page_number 'page' request.GET.urlencode %}">
+												<span class="sr-only">Next</span>
+												<i class="fa fa-angle-right" aria-hidden="true"></i>
+											</a>
+										</li>	
+										<li>
+											<a href="{% my_url page.num_pages 'page' request.GET.urlencode %}">
+												<span>Last</span>
+											</a>
+										</li>
+										{% endif %}
+										
+									</ul>
+									
+								</div>
+								
+								</div>
+							</div>
+
+
+						</div>
+
+					</div>
+				</div>
+			</section>
+{% endblock %}

@@ -1,0 +1,164 @@
+{% extends 'ep/base.html' %}
+{% block content %}
+			<section class="page_breadcrumbs ds parallax section_padding_top_65 section_padding_bottom_65">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-12 text-center">
+							<h2 class="highlight">FAQs</h2>
+							<ol class="breadcrumb darklinks">
+								<li>
+									<a href="{% url 'index' %}">
+							Home
+						</a>
+								</li>
+								
+								<li class="active">FAQs</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="ls section_padding_100">
+				<div class="container">
+
+					<div class="row">
+						<div class="col-sm-6">
+
+							<div class="panel-group" id="accordion1">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#accordion1" href="#collapse1">
+												<i class="fa fa-envelope"></i>
+												How can I become a Plastic Collector or Recycling Company ?
+											</a>
+										</h4>
+									</div>
+									<div id="collapse1" class="panel-collapse collapse in">
+										<div class="panel-body">
+											There are two ways to do that : <br><br>1) Send an email to e.plastic.aans@gmail.com where you need to wait for 2-3 business days for approval and sign-up link.<br><br>2)Below given button will redirect to Admin Page it will instantly create your account but it may take 3-5 bussiness days to approve your verification<Br><a href="{% url 'index' %}#reviews" >Click here</a>.
+										</div>
+									</div>
+								</div>
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#accordion1" href="#collapse2" class="collapsed">
+												<i class="fa fa-envelope"></i>
+												The data of Plastic Selling Reports are accurate ?
+											</a>
+										</h4>
+									</div>
+									<div id="collapse2" class="panel-collapse collapse">
+										<div class="panel-body">
+											As we have genuine Plastic Collectors and the differentiation given by them for Usage and Wastage is accurate and thus your plastic product will be used in upcoming Recycled plastic products.
+										</div>
+									</div>
+								</div>
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#accordion1" href="#collapse3" class="collapsed">
+												<i class="fa fa-envelope"></i>
+												Can Plastic Collecotr pay online to me through this site?
+											</a>
+										</h4>
+									</div>
+									<div id="collapse3" class="panel-collapse collapse">
+										<div class="panel-body">
+											No, Plastic collector can't pay online as they don't know total weight of your Plastic wastage, however if the plastic collector uses internet banking then you can pay them online when they come to your door step, whereas if you want to check that whether the Plastic Collector uses internet banking then you can always email them for confirmation!  
+										</div>
+									</div>
+								</div>
+
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#accordion1" href="#collapse4" class="collapsed">
+												<i class="fa fa-envelope"></i>
+												What is the procedure of order cancellation !
+											</a>
+										</h4>
+									</div>
+									<div id="collapse4" class="panel-collapse collapse">
+										<div class="panel-body">
+											Once your order is placed it cannot be cancelled and still if you have any queries regarding orders you can always contact us via email <b>e.plastic.aans@gmail.com</b>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+
+						<div class="col-sm-6">
+							<div class="panel-group" id="accordion2">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#accordion2" href="#collapse21" class="collapsed">
+												<i class="fa fa-envelope"></i>
+												How much time does it take to Ship my product ?
+											</a>
+										</h4>
+									</div>
+									<div id="collapse21" class="panel-collapse collapse">
+										<div class="panel-body">
+											It will take 3-7 business days for your product to reach at your door-step.
+										</div>
+									</div>
+								</div>
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#accordion2" href="#collapse22" class="collapsed">
+												<i class="fa fa-envelope"></i>
+												How can I get a invoice of my shopping?
+											</a>
+										</h4>
+									</div>
+									<div id="collapse22" class="panel-collapse collapse">
+										<div class="panel-body">
+											Once you Pay for the product than you need to go your orders and you can download your invoice.
+										</div>
+									</div>
+								</div>
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#accordion2" href="#collapse23" class="collapsed">
+												<i class="fa fa-envelope"></i>
+												How can I place order ?
+											</a>
+										</h4>
+									</div>
+									<div id="collapse23" class="panel-collapse collapse">
+										<div class="panel-body">
+											To place orders, first you need to <a href="{% url 'signup' %}">Sign-up</a> / <a href="{% url 'signin' %}">Sign-in</a> as a customer then you can place a order.
+										</div>
+									</div>
+								</div>
+
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#accordion2" href="#collapse24" class="collapsed">
+												<i class="fa fa-envelope"></i>
+												How does your Refund Policy works?
+											</a>
+										</h4>
+									</div>
+									<div id="collapse24" class="panel-collapse collapse">
+										<div class="panel-body">
+											If your payment is deducted and your order is failed then you'll get your refund in your bank account within 5-7 working days. 
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</section>
+{% endblock %}

@@ -1,0 +1,125 @@
+{% extends 'ep/base5.html' %}
+{% load static %}
+{% block content %}
+			<section class="ls with_bottom_border">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-6">
+							<ol class="breadcrumb darklinks">
+								<li>
+									<a href="#">Homepage</a>
+								</li>
+								<li class="active">Dashboard</li>
+							</ol>
+						</div>
+						<div class="col-md-6 text-md-right">
+							<span class="dashboard-daterangepicker">
+								<i class="fa fa-calendar"></i>
+								<span></span>
+								<i class="caret"></i>
+							</span>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="ls section_padding_top_50 section_padding_bottom_50 columns_padding_10">
+				<div class="container-fluid">
+
+					<div class="row">
+						<div class="col-md-4">
+							<h3 class="dashboard-page-title">{{request.session.Pcname}} 
+								
+								<small>{{request.session.Role}}</small>
+
+								
+							</h3>
+						</div>
+						
+
+					</div>
+
+
+					<div class="row">
+						
+						<div  class="col-lg-3 col-sm-6">
+							<a href="{% url 'report' pk=request.session.id %}">
+
+							<div class="teaser warning_bg_color counter-background-teaser text-center">
+								<span class="counter counter-background" data-from="0" data-to="{{count_r}}" data-speed="2100">0</span>
+								<h3 class="counter highlight" data-from="0" data-to="{{count_r}}" data-speed="2100">0</h3>	
+								<p>Total Reports</p>
+							</div>
+						</a>
+						</div>
+
+						<div class="col-lg-3 col-sm-6">
+							<a href="{% url 'report' pk=request.session.id %}">
+								<div class="teaser danger_bg_color counter-background-teaser text-center">
+								<span class="counter counter-background" data-from="0" data-to="{{totalcollection_r}}" data-speed="1500">0</span>
+								<h3 class="counter highlight" data-from="0" data-to="{{totalcollection_r}}" data-speed="1500">0</h3>
+								<p>Total Collection</p>
+							</div>
+							</a>
+						</div>
+
+						<div class="col-lg-3 col-sm-6">
+							<a href="{% url 'report' pk=request.session.id %}">
+								<div class="teaser success_bg_color counter-background-teaser text-center">
+								<span class="counter counter-background" data-from="0" data-to="{{t_usage_r}}" data-speed="1900">0</span>
+								<h3 class="counter highlight" data-from="0" data-to="{{t_usage_r}}" data-speed="1900">0</h3>
+								<p>Total Usage</p>
+							</div>
+							</a>
+						</div>
+
+						<div class="col-lg-3 col-sm-6">
+							<a href="{% url 'report' pk=request.session.id %}">
+								<div class="teaser info_bg_color counter-background-teaser text-center">
+								<span class="counter counter-background" data-from="0" data-to="{{t_waste_r}}" data-speed="1800">0</span>
+								<h3 class="counter-wrap highlight" data-from="0" data-to="{{t_waste_r}}" data-speed="1800">
+									<span class="counter" data-from="0" data-to="{{t_waste_r}}" data-speed="1500">0</span>
+								</h3>
+								<p>Total Wastage</p>
+							</div>
+							</a>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="ls section_padding_top_100 section_padding_bottom_100">
+				<div class="container">
+					<div class="row columns_padding_25 columns_margin_bottom_20">
+						<div class="col-md-6">
+							<img src="{% static 'images/gallery/05.jpg' %}" alt="">
+						</div>
+						<div class="col-md-6">
+							<h2 class="section_header with_icon">
+								Plastic Collector
+							</h2>
+							<p>
+					Thank You for becoming a Plastic Collector there are certain thing you should know before being a plastic collector such as : 
+				</p>
+							<ul class="list2 grey bottommargin_0">
+								<li>You will get request from Customer for collecting plastic waste</li>
+								<li>You will also get request from Recycling Company where you can sell plastic to them </li>
+								<li>You need to differentiate Plastic that can be recycled and non recycled </li>
+								<li>You need to add report of Customer whenever you get a pick-up request</li>
+							</ul>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<p>
+								Our Vision is be a leader in Plastic Conversion while providing Quality, Technology & Professional Development to our customers and the market whilst catering for our shareholders at all times.
+				</p>
+						</div>
+					</div>
+				</div>
+			</section>
+			
+
+		</div>
+	</div>
+
+{% endblock %}

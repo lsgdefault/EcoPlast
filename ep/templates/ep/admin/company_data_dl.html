@@ -1,0 +1,49 @@
+{% extends 'ep/admin/base6.html' %}
+{% block content %}
+
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid">
+                        <h1 class="mt-4">Download Recycled Products Selling  to Customer</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                            <li class="breadcrumb-item">Reports</li>
+                            <li class="breadcrumb-item active">Recycling Company Data Download</li>
+                        </ol>
+                        {% if error %}
+                        <div class="alert alert-danger" role="alert">
+                            <button type="button" class="close" data-dismiss="alert">
+                                <span aria-hidden="true">×</span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                            <strong>{{error}}</strong>
+                        </div>
+                        {% endif %}
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <form action="{% url 'rcdatapdf' %}" class="form-inline filters-form" method="GET">
+                                    &nbsp;&nbsp;&nbsp;                                   
+                                   
+                                    <input list="brow" name="rc" placeholder="Select Company">
+                                    <datalist id="brow"  style="height: fit-content;">
+                                        <option value="All Companies"></option> 
+                                        {% for p in rc %}
+                                        <option value="{{p.comp_name}}"></option>
+                                        {% endfor %}
+                                    </datalist> 
+                                    &nbsp;
+                                    Starting Date<input type="text" name="sdate" placeholder="YYYY-MM-DD" onfocus="(this.type='date')"onblur="(this.type='text')">
+                                    &nbsp;Ending Date<input type="text" name="edate" placeholder="YYYY-MM-DD" onfocus="(this.type='date')"onblur="(this.type='text')">
+                                    &nbsp;&nbsp;&nbsp;
+                                    <button  class="theme_button color2" >
+                                        <i class="fa fa-download">
+                                        </i> Download</button>                                  
+                                    
+                                </form>
+                            </div>
+                           
+                        </div>
+
+                    </div>
+                </main>
+{% endblock %}

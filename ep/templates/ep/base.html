@@ -1,0 +1,232 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+	<title>EcoPlast</title>
+    <link rel = "icon" href = "{% static 'images/logo.png' %}"type = "image/x-icon">
+	<meta charset="utf-8">
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/animations.css' %}">
+	<link rel="stylesheet" href="{% static 'css/fonts.css' %}">
+	<link rel="stylesheet" href="{% static 'css/main.css' %}" class="color-switcher-link">
+	<script src="{% static 'js/vendor/modernizr-2.6.2.min.js' %}"></script>
+</head>
+-<body>
+	<div class="preloader">
+		<div class="preloader_image"></div>
+	</div>
+	<div id="canvas">
+		<div id="box_wrapper">
+			<header class="page_header header_white toggler_xs_right section_padding_20">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-sm-12 display_table">
+							{% if request.session.id %}
+							<div class="header_left_logo display_table_cell">
+								<a href="{% url 'index2' %}" class="logo top_logo">
+									<img src="{% static 'images/logo.png' %}" alt="">
+									<span class="logo_text">
+										<span class="big">EcoPlast</span>
+										<span class="small-text">Recycling</span>
+									</span>
+								</a>
+							</div>
+							{% else %}
+							<div class="header_left_logo display_table_cell">
+								<a href="{% url 'index' %}" class="logo top_logo">
+									<img src="{% static 'images/logo.png' %}" alt="">
+									<span class="logo_text">
+										<span class="big">EcoPlast</span>
+										<span class="small-text">Recycling</span>
+									</span>
+								</a>
+							</div>
+							{% endif %}
+							<div class="header_mainmenu display_table_cell text-center">
+								{% if request.session.id %}
+								<nav class="mainmenu_wrapper">
+									<ul class="mainmenu nav sf-menu">
+										<li>
+											<a href="{% url 'index2' %}">Home</a>
+										</li>
+										<li>
+											<a>Shop</a>
+											<ul>
+												<li>
+													<a href="{% url 'showpro' %}">Products</a>
+												</li>
+												<li>
+													<a href="{% url 'showthecart' pk=request.session.id %}">Shopping Cart</a>
+												</li>
+												
+												<li>
+													<a href="{% url 'checkout' pk=request.session.id %}">Checkout</a>
+												</li>
+												
+											</ul>
+										</li>
+										<li><a href="{% url 'custorder' %}">My Orders</a></li>
+										<li><a href="#pickup">Schedule Pickup</a></li>
+										<li>
+											<a href="">Reports</a>
+											<ul>
+												<li>
+													<a href="{% url 'report' pk=request.session.id %}">View</a>
+												</li>
+												<li>
+													<a href="{% url	 'download' %}">Download</a>
+												</li>
+											</ul>
+										</li>
+										<li>
+											<a>{{request.session.Firstname}}</a>
+											<ul>
+												<li>
+													<a href="{% url 'profiledata' pk=request.session.id %}">My Profile</a>
+												</li>
+												<li>
+													<a href="{% url 'logout' %}">Log Out</a>
+												</li>
+											</ul>
+										</li>
+										
+											
+										</li>
+									</ul>
+								</nav>
+								{% else %}
+								<nav class="mainmenu_wrapper">
+									<ul class="mainmenu nav sf-menu">
+										<li>
+											<a href="{% url 'index' %}">Home</a>
+										</li>
+										<li>
+											<a>Shop</a>
+											<ul>
+												<li>
+													<a href="{% url 'showpro' %}">Products</a>
+												</li>
+											
+											</ul>
+										</li>
+										
+											<li>
+												<a>Account</a>
+												<ul>
+													<li>
+														<a href="{% url 'signin' %}">Signin</a>
+													</li>
+													<li>
+														<a href="{% url 'signup' %}">Signup</a>
+													</li>
+												</ul>
+											</li>
+											
+										</li>
+									</ul>
+								</nav>
+								{% endif %}
+								<span class="toggle_menu">
+									<span></span>
+								</span>
+							</div>
+							<div class="header_right_buttons display_table_cell text-right hidden-xs">
+								<div class="darklinks">
+									<a href="#" class="social-icon border-icon rounded-icon soc-facebook"></a>
+									<a href="#" class="social-icon border-icon rounded-icon soc-twitter"></a>
+									<a href="#" class="social-icon border-icon rounded-icon soc-google"></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+            </header>
+{% block content %}
+{% endblock %}
+<footer class="page_footer ds ms bg_image section_padding_50">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-3 col-sm-6 to_animate">
+                <div class="widget_text">
+                    <h3 class="widget-title">Why Us?</h3>
+                    <p>There are many website out there which may do the same but here we have establish new thing that is your report where you can see your report after selling plastic that how much plastic was used to recycle and how much was wasted.</p>
+                    <p class="topmargin_40">
+            <a href="{% url 'showpro' %}" class="theme_button">Buy Now!</a>
+        </p>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6 to_animate">
+                <div class="widget widget_recent_entries">
+                    <h3 class="widget-title">Newly Added Features</h3>
+                    <ul>
+                        <li>
+                            <p class="post-date">
+                    <a href="">02.04.2021</a>
+                </p>
+                            <p>Now you can download your Reports </p>
+                        </li>
+                        <li>
+                            <p class="post-date">
+                    <a href="">03.04.2021 </a>
+                </p>
+                            <p>Now you can download reports with filter</p>
+                        </li>
+                        <li>
+                            <p class="post-date">
+                    <a href="">04.04.2021 </a>
+                </p>
+                            <p>Imporved Index page with detail information</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 to_animate">
+                <div class="widget widget_recent_entries">
+                    <h3 class="widget-title">Up-Coming Features</h3>
+                    <ul>
+                        <li>
+                            <p>In near future we will introduce E-wallet, with this features our customer will able to save when they place an order through our website.</p>
+                        </li>
+                        <li>
+                            <p>We are also thinking to make a chat box between Customer and Plastic Collector for better communication relating to status of pick-up.</p>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 to_animate">
+                <div class="widget_text">
+                    <h3 class="widget-title">Contact Us</h3>
+                    <p>Ahmedabad,Gujarat</p>
+                    <ul class="list1 no-bullets">
+                        
+                        <li>
+                            <i class="rt-icon2-globe-outline highlight"></i> <a href="{% url 'index' %}">www.EcoPlast.com</a>
+                        </li>
+                        <li>
+                            <i class="rt-icon2-mail2 highlight"></i> <a>e.plastic.aans@gmail.com</a>
+                        </li>
+
+                    </ul>
+
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+</footer>
+
+
+</div>
+</div>
+<script src="{% static 'js/compressed.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+<script src="{% static 'js/switcher.js' %}"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTwYSMRGuTsmfl2z_zZDStYqMlKtrybxo"></script>
+</body>
+</html>

@@ -1,0 +1,539 @@
+{% extends 'ep/base.html' %}
+{% load static %}
+{% block content %}
+<style>
+	html{
+		scroll-behavior: smooth;
+	}
+</style>
+<section class="intro_section page_mainslider ds">
+	<div class="flexslider" data-dots="false">
+		<ul class="slides">
+
+			<li>
+				<img src="{% static 'images/slide01.jpg' %}" alt="">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-12 text-center">
+							<div class="slide_description_wrapper">
+								<div class="slide_description">
+									<div class="intro-layer" data-animation="fadeInRight">
+										<h3 class="highlight">
+											EcoPlast
+										</h3>
+									</div>
+									<div class="intro-layer" data-animation="fadeInRight">
+										<h2>
+											Recycling
+										</h2>
+									</div>
+									<div class="intro-layer" data-animation="fadeInRight">
+										<p>We can solve your corporate IT disposition needs quickly and professionally.<br> Save Your community, Save Your planet</p>
+										<a href="{% url 'aboutus' %}" class="theme_button color1">About us</a>
+									</div>
+								</div>
+								<!-- eof .slide_description -->
+							</div>
+							<!-- eof .slide_description_wrapper -->
+						</div>
+						<!-- eof .col-* -->
+					</div>
+					<!-- eof .row -->
+				</div>
+				<!-- eof .container -->
+			</li>
+
+			<li>
+				<img src="{% static 'images/slide02.jpg' %}" alt="">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-12 text-center">
+							<div class="slide_description_wrapper">
+								<div class="slide_description">
+									<div class="intro-layer" data-animation="fadeInRight">
+										<h2 class="small">
+											Save Your Planet
+										</h2>
+									</div>
+									<div class="intro-layer" data-animation="fadeInRight">
+										<h3 class="highlight text-uppercase bottommargin">
+											Save Your community
+										</h3>
+									</div>
+									<div class="intro-layer" data-animation="fadeInRight">
+										<p>We can solve your corporate IT disposition needs quickly and professionally.<br> Save Your community, Save Your planet</p>
+										<a href="{% url 'aboutus' %}" class="theme_button color1">Our services</a>
+									</div>
+								</div>
+								<!-- eof .slide_description -->
+							</div>
+							<!-- eof .slide_description_wrapper -->
+						</div>
+						<!-- eof .col-* -->
+					</div>
+					<!-- eof .row -->
+				</div>
+				<!-- eof .container -->
+			</li>
+
+			<li>
+				<img src="{% static 'images/slide03.jpg' %}" alt="">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-12 text-center">
+							<div class="slide_description_wrapper">
+								<div class="slide_description">
+									<div class="intro-layer" data-animation="fadeInRight">
+										<h3 class="highlight text-uppercase">
+											Circular
+										</h3>
+									</div>
+									<div class="intro-layer" data-animation="fadeInRight">
+										<h2 class="text-uppercase">
+											Economy
+										</h2>
+									</div>
+									<div class="intro-layer" data-animation="fadeInRight">
+										<p>We can solve your corporate IT disposition needs quickly and professionally.<br> Save Your community, Save Your planet</p>
+										<a href="{% url 'aboutus' %}" class="theme_button color1">contact us</a>
+									</div>
+								</div>
+								<!-- eof .slide_description -->
+							</div>
+							<!-- eof .slide_description_wrapper -->
+						</div>
+						<!-- eof .col-* -->
+					</div>
+					<!-- eof .row -->
+				</div>
+				<!-- eof .container -->
+			</li>
+
+		</ul>
+	</div>
+	<!-- eof flexslider -->
+
+	<div class="scroll_button_wrap">
+		<a href="#about" class="scroll_button">
+			<span class="sr-only">scroll down</span>
+		</a>
+	</div>
+</section>
+			<section id="services" class="ls ms section_padding_100">
+
+				<div class="container">
+					<div class="col-sm-12">
+							<h1 class="divider_40">Plastic &nbsp; Selling &nbsp; Reports&nbsp; :</h1>
+						</div>
+{% if request.session.id %}
+					<div class="row">
+						
+					</div>
+					<div class="row">
+						<div class="col-md-3 col-sm-6">
+
+							<div class="teaser text-center">
+								<div class="teaser_icon grey size_big">
+									<i class="rt-icon2-stack" style="color:green;"></i>
+								</div>
+								<h3 class="counter-wrap highlight" data-from="0" data-to="40" data-speed="1800">
+									<span class="counter" data-from="0" data-to="{{count_s}}" data-speed="1500">0</span>
+								</h3>
+								<p>Total Reports</p>
+							</div>
+
+						</div>
+
+						<div class="col-md-3 col-sm-6">
+
+							<div class="teaser text-center">
+								<div class="teaser_icon grey size_big">
+									<i class="rt-icon2-layers" style="color:green;"></i>
+								</div>
+								<h3 class="counter highlight" data-from="0" data-to="{{totalcollection_s}}" data-speed="2100">0</h3>
+								<p>Total Collection </p><span>in KGs</span>
+							</div>
+
+						</div>
+
+
+						<div class="col-md-3 col-sm-6">
+
+							<div class="teaser text-center">
+								<div class="teaser_icon grey size_big">
+									<i class="fa fa-recycle " style="color:green;"></i>
+								</div>
+								<h3 class="counter highlight" data-from="0" data-to="{{t_usage_s}}" data-speed="1400">0</h3>
+								<p>Total Usage</p><span>in KGs</span>
+							</div>
+
+						</div>
+
+						<div class="col-md-3 col-sm-6">
+
+							<div class="teaser text-center">
+								<div class="teaser_icon grey size_big">
+									<i class="rt-icon2-trashcan" style="color:red;"></i>
+								</div>
+								<h3 class="highlight counter-wrap">
+									<span class="counter" data-from="0" data-to="{{t_waste_s}}" data-speed="1500">0</span>
+								</h3>
+								<p>Total Wastage</p><span>in KGs</span>
+							</div>
+
+						</div>
+						
+					</div>
+					<div class="row topmargin_30">
+						<div class="col-sm-12 text-center">
+							<a href="{% url 'report' pk=request.session.id %}" class="theme_button wide_button color1">All Reports</a>
+						</div>
+					</div>
+{% else %}
+{% if report_i %}
+					<div class="row">
+						<div class="col-md-3 col-sm-6">
+							
+							<div class="teaser text-center">
+								<div class="teaser_icon grey size_big">
+									<i class="rt-icon2-stack" style="color:green;"></i>
+								</div>
+								<h3 class="counter-wrap highlight" data-from="0" data-to="40" data-speed="1800">
+									<span class="counter" data-from="0" data-to="{{count_i}}" data-speed="1500">0</span>
+								</h3>
+								<p>Total Reports</p>
+							</div>
+				
+						</div>
+				
+						<div class="col-md-3 col-sm-6">
+				
+							<div class="teaser text-center">
+								<div class="teaser_icon grey size_big">
+									<i class="rt-icon2-layers" style="color:green;"></i>
+								</div>
+								<h3 class="counter highlight" data-from="0" data-to="{{totalcollection_i}}" data-speed="2100">0</h3>
+								<p>Total Collection </p><span>in KGs</span>
+							</div>
+				
+						</div>
+				
+				
+						<div class="col-md-3 col-sm-6">
+				
+							<div class="teaser text-center">
+								<div class="teaser_icon grey size_big">
+									<i class="fa fa-recycle " style="color:green;"></i>
+								</div>
+								<h3 class="counter highlight" data-from="0" data-to="{{t_usage_i}}" data-speed="1400">0</h3>
+								<p>Total Usage</p><span>in KGs</span>
+							</div>
+				
+						</div>
+				
+						<div class="col-md-3 col-sm-6">
+				
+							<div class="teaser text-center">
+								<div class="teaser_icon grey size_big">
+									<i class="rt-icon2-trashcan" style="color:red;"></i>
+								</div>
+								<h3 class="highlight counter-wrap">
+									<span class="counter" data-from="0" data-to="{{t_waste_i}}" data-speed="1500">0</span>
+								</h3>
+								<p>Total Wastage</p><span>in KGs</span>
+							</div>
+				
+						</div>
+						
+
+					</div>
+{% endif %}
+{% endif %}
+				</section>
+{% if request.session.id %}
+			<section id="pickup" class="ds page_contact parallax section_padding_100">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-12 text-center">
+							<h2 class="section_header with_icon">
+								Schedule Pickup
+							</h2>
+							<p class="small-text">For old equipment</p>
+							<form method="post" action="{% url 'scheduleorder' %}">
+								{% csrf_token %}
+								{% if msg %}
+								<div class="alert alert-success" role="alert">
+									<button type="button" class="close" data-dismiss="alert">
+										<span aria-hidden="true">×</span>
+										<span class="sr-only">Close</span>
+									</button>
+									<strong>{{msg}}</strong>
+								</div>
+								{% endif %}
+
+								<div class="col-md-3">
+									<div class="row_margin_700">
+										<div class="form-group has-placeholder">
+											<label for="pickup-name" >Full Name</label>
+											<i class="fa fa-user highlight2" aria-hidden="true"></i>
+											<input type="text" aria-required="true" size="30" value="" name="pickup_name" id="pickup-name" class="form-control" placeholder="Full Name">
+										</div>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="row_margin_700">
+										<div class="form-group has-placeholder">
+											<label for="pickup-phone">Phone Number</label>
+										<i class="fa fa-phone highlight2" aria-hidden="true"></i>
+										<input type="number" aria-required="true" size="30" value="" name="pickup_number" id="pickup-phone" class="form-control" placeholder="Phone Number">
+										</div>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="row_margin_700">
+										<div class="form-group has-placeholder">
+											<label for="pickup-time">Time</label>
+										<i class="fa fa-calendar highlight2" aria-hidden="true"></i>
+										<input type="datetime-local"aria-required="true" class="form-control" id="pickup-time" name="pickup_date_time">
+										</div>
+									</div>
+								</div>
+								
+								<div class="col-sm-12">
+									<div class="form-group">
+										<div class="form-group has-placeholder">
+										<label for="pickup-message">Message</label>
+										<i class="fa fa-comment-o highlight2" aria-hidden="true"></i>
+										<textarea aria-required="true" rows="3" cols="45" name="pickup_comment" id="pickup-message" class="form-control" placeholder="Message"></textarea>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-sm-12">
+
+									<div class="contact-form-submit topmargin_20">
+										<a href="#pickup"><button type="submit" class="theme_button color1">Order pickup</button></a>
+									</div>
+								</div>
+
+
+							</form>
+
+						</div>
+					</div>
+				</div>
+			</section>
+{% endif %}
+<section class="ls overflow_hidden half_section section_padding_top_100 section_padding_bottom_150 columns_padding_80">
+	<div class="image_cover image_cover_left">
+		<!-- you can put your image here instead of puting it in column-->
+		<!-- <img src="img/parallax/half_image.jpg" alt=""> -->
+	</div>
+</section>
+
+
+			<section id="faq" class="ls ms section_padding_100">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-12 text-center">
+							<h2 class="section_header with_icon">
+								FAQ
+							</h2>
+							<p class="small-text grey bottommargin_0">Frequently asked Questions</p>
+						</div>
+					</div>
+					<div class="row columns_margin_top_60">
+						<div class="col-md-4">
+							<div class="teaser with_background rounded text-center">
+								<div class="teaser_icon main_bg_color2 round offset_icon fontsize_30">
+									<h3 class="margin_0">?</h3>
+								</div>
+								<h4 class="poppins">
+									How can I become a Plastic Collector or Recycling Company ?
+								</h4>
+								<p>
+						There are two ways to do that : <br>1) Send an email to e.plastic.aans@gmail.com where you need to wait for 2-3 business days for approval and sign-up link.<br>2)Below given link will redirect to Admin Page it will instantly create your account but it may take 3-5 bussiness days to approve your verification <Br><a href="#reviews" >Click here</a>.
+					</p>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="teaser with_background rounded text-center">
+								<div class="teaser_icon main_bg_color3 round offset_icon fontsize_30">
+									<h3 class="margin_0">?</h3>
+								</div>
+								<h4 class="poppins">
+									Can Plastic Collector pay online to me through this site?
+								</h4>
+								<p>
+									No, Plastic collector can't pay online as they don't know total weight of your Plastic wastage, however if the plastic collector uses internet banking then you can pay them online when they come to your door step, whereas if you want to check that whether the Plastic Collector uses internet banking then you can always email them for confirmation!  
+								</p>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="teaser with_background rounded text-center">
+								<div class="teaser_icon main_bg_color round offset_icon fontsize_30">
+									<h3 class="margin_0">?</h3>
+								</div>
+								<h4 class="poppins">
+									The data of Plastic Selling Reports are accurate ?
+								</h4>
+								<p>
+						As we have genuine Plastic Collectors and the differentiation given by them for Usage and Wastage is accurate and thus your plastic product will be used in upcoming Recycled plastic products.
+					</p>
+							</div>
+						</div>
+					</div>
+					<div class="row topmargin_30">
+						<div class="col-sm-12 text-center">
+							<a href="{% url 'faq' %}" class="theme_button color1 wide_button">to faq page</a>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section id="reviews" class="ls section_padding_100">
+				
+					<div class="row" style="margin: auto;width: 60%;padding: 10px;">
+						<div class="col-md-14">
+							<h3>Quick Sign-In and Sign-Up</h3>
+							<ul class="nav nav-tabs" role="tablist">
+								<li class="active"><a href="#tab1" role="tab" data-toggle="tab">Recycling Company</a></li>
+								<li><a href="#tab2" role="tab" data-toggle="tab">Plastic Collector</a></li>
+							</ul>
+							<div class="tab-content">
+								<div class="tab-pane fade in active" id="tab1">
+									<p>
+							Recycling Company creates recycling products from plastic collected from customer. <br><br>
+							<a class="theme_button inverse" href="{% url 'adminin' %}">Sign-In</a>
+							<a class="theme_button" href="{% url 'adminsp' %}">Sign-Up</a> 
+						</p>
+								</div>
+								<div class="tab-pane fade" id="tab2">
+									<p>
+							Plastic Collector, collects plastic from customer. And this plastic further is sold to Recycling Company for creating Plastic product
+							<br><br><a class="theme_button inverse" href="{% url 'adminin' %}">Sign-In</a>
+							<a class="theme_button " href="{% url 'adminsp' %}">Sign-Up</a> 
+						</p>
+								</div>
+								
+						</div>
+					</div>
+			</section>
+
+			
+			
+
+			<section class="ls">
+				<div class="owl-carousel" data-responsive-xlg="8" data-responsive-lg="8" data-responsive-md="5" data-responsive-sm="3" data-responsive-xs="2" data-loop="true" data-margin="0" data-nav="true">
+
+					<div class="vertical-item content-absolute corporate consulting">
+						<div class="item-media">
+							<img src="images/gallery_square/01.jpg" alt="">
+							<div class="media-links">
+								<a class="abs-link prettyPhoto" data-gal="prettyPhoto[gal]" title="" href="images/gallery/01.jpg"></a>
+							</div>
+						</div>
+					</div>
+
+					<div class="vertical-item content-absolute corporate consulting">
+						<div class="item-media">
+							<img src="images/gallery_square/02.jpg" alt="">
+							<div class="media-links">
+								<a class="abs-link prettyPhoto" data-gal="prettyPhoto[gal]" title="" href="images/gallery/02.jpg"></a>
+							</div>
+						</div>
+					</div>
+
+					<div class="vertical-item content-absolute corporate consulting">
+						<div class="item-media">
+							<img src="images/gallery_square/03.jpg" alt="">
+							<div class="media-links">
+								<a class="abs-link prettyPhoto" data-gal="prettyPhoto[gal]" title="" href="images/gallery/03.jpg"></a>
+							</div>
+						</div>
+					</div>
+
+					<div class="vertical-item content-absolute corporate consulting">
+						<div class="item-media">
+							<img src="images/gallery_square/04.jpg" alt="">
+							<div class="media-links">
+								<a class="abs-link prettyPhoto" data-gal="prettyPhoto[gal]" title="" href="images/gallery/04.jpg"></a>
+							</div>
+						</div>
+					</div>
+
+					<div class="vertical-item content-absolute corporate consulting">
+						<div class="item-media">
+							<img src="images/gallery_square/05.jpg" alt="">
+							<div class="media-links">
+								<a class="abs-link prettyPhoto" data-gal="prettyPhoto[gal]" title="" href="images/gallery/05.jpg"></a>
+							</div>
+						</div>
+					</div>
+
+					<div class="vertical-item content-absolute corporate consulting">
+						<div class="item-media">
+							<img src="images/gallery_square/06.jpg" alt="">
+							<div class="media-links">
+								<a class="abs-link prettyPhoto" data-gal="prettyPhoto[gal]" title="" href="images/gallery/06.jpg"></a>
+							</div>
+						</div>
+					</div>
+
+					<div class="vertical-item content-absolute corporate consulting">
+						<div class="item-media">
+							<img src="images/gallery_square/07.jpg" alt="">
+							<div class="media-links">
+								<a class="abs-link prettyPhoto" data-gal="prettyPhoto[gal]" title="" href="images/gallery/07.jpg"></a>
+							</div>
+						</div>
+					</div>
+
+					<div class="vertical-item content-absolute corporate consulting">
+						<div class="item-media">
+							<img src="images/gallery_square/08.jpg" alt="">
+							<div class="media-links">
+								<a class="abs-link prettyPhoto" data-gal="prettyPhoto[gal]" title="" href="images/gallery/08.jpg"></a>
+							</div>
+						</div>
+					</div>
+
+					<div class="vertical-item content-absolute corporate consulting">
+						<div class="item-media">
+							<img src="images/gallery_square/09.jpg" alt="">
+							<div class="media-links">
+								<a class="abs-link prettyPhoto" data-gal="prettyPhoto[gal]" title="" href="images/gallery/09.jpg"></a>
+							</div>
+						</div>
+					</div>
+
+					<div class="vertical-item content-absolute corporate consulting">
+						<div class="item-media">
+							<img src="images/gallery_square/10.jpg" alt="">
+							<div class="media-links">
+								<a class="abs-link prettyPhoto" data-gal="prettyPhoto[gal]" title="" href="images/gallery/10.jpg"></a>
+							</div>
+						</div>
+					</div>
+
+					<div class="vertical-item content-absolute corporate consulting">
+						<div class="item-media">
+							<img src="images/gallery_square/11.jpg" alt="">
+							<div class="media-links">
+								<a class="abs-link prettyPhoto" data-gal="prettyPhoto[gal]" title="" href="images/gallery/11.jpg"></a>
+							</div>
+						</div>
+					</div>
+
+					<div class="vertical-item content-absolute corporate consulting">
+						<div class="item-media">
+							<img src="images/gallery_square/12.jpg" alt="">
+							<div class="media-links">
+								<a class="abs-link prettyPhoto" data-gal="prettyPhoto[gal]" title="" href="images/gallery/12.jpg"></a>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</section>
+{% endblock %}

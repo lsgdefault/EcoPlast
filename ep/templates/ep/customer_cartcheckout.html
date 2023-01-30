@@ -1,0 +1,235 @@
+{% extends 'ep/base3.html' %}
+{% block content %}
+			<section class="page_breadcrumbs ds parallax section_padding_top_65 section_padding_bottom_65">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-12 text-center">
+							<h2 class="highlight">{{request.session.Firstname}} {{request.session.Lastname}}</h2>
+							<ol class="breadcrumb darklinks">
+								<li>
+									<a href="{% url 'index2' %}">
+							Home
+						</a>
+								</li>
+								<li>
+									<a href="#">Shop</a>
+								</li>
+								<li class="active">Checkout</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+			</section>
+
+
+			<section class="ls section_padding_top_100 section_padding_bottom_75 columns_padding_25">
+				<div class="container">
+
+					<div class="row">
+
+						<div class="col-sm-7 col-md-8 col-lg-9 col-sm-push-5 col-md-push-4 col-lg-push-3">
+
+
+							<div class="collapse" id="registeredForm">
+								<form class="checkout with_border with_padding form-horizontal" role="form">
+									<p>If you have shopped with us before, please enter your details in the boxes below. If you are a new customer please proceed to the Billing &amp; Shipping section.</p>
+
+									<div class="form-group">
+										<label for="username" class="col-sm-3 control-label">
+											<span class="grey">Nick or email:</span>
+											<span class="required">*</span>
+										</label>
+										<div class="col-sm-9">
+											<input type="text" class="form-control" name="username" id="username">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="password" class="col-sm-3 control-label">
+											<span class="grey">Password:</span>
+											<span class="required">*</span>
+										</label>
+										<div class="col-sm-9">
+											<input class="form-control" type="password" name="password" id="password">
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="col-sm-offset-3 col-sm-9">
+											<div class="checkbox">
+												<label for="rememberme" class="control-label">
+													<input name="rememberme" type="checkbox" id="rememberme" value="forever"> Remember me
+												</label>
+											</div>
+											<input type="submit" class="theme_button color1 topmargin_20" name="login" value="Login">
+											<div class="lost_password">
+												<a href="#">Lost your password?</a>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+
+							<h2>Billing Address</h2>
+{% if key23 %}  
+							<form class="form-horizontal checkout shop-checkout" role="form">
+								<div class="form-group validate-required" id="billing_first_name_field">
+									<label for="billing_first_name" class="col-sm-3 control-label">
+										<span class="grey">First Name:</span>
+										<span class="required">*</span>
+									</label>
+									<div class="col-sm-9">
+                                        {{key23.fname}}
+									</div>
+								</div>
+								<div class="form-group validate-required" id="billing_last_name_field">
+									<label for="billing_last_name" class="col-sm-3 control-label">
+										<span class="grey">Last Name:</span>
+										<span class="required">*</span>
+									</label>
+									<div class="col-sm-9">
+                                        {{key23.lname}}
+									</div>
+								</div>
+
+								<div class="form-group address-field validate-required" id="billing_address_fields">
+									<label for="billing_address_1" class="col-sm-3 control-label">
+										<span class="grey">Address:</span>
+										<span class="required">*</span>
+									</label>
+									<div class="col-sm-9">
+                                        {{key23.address}}
+									</div>
+								</div>
+								<div class="form-group address-field validate-required" id="billing_city_field">
+									<label for="billing_city" class="col-sm-3 control-label">
+										<span class="grey">Town / City:</span>
+										<span class="required">*</span>
+									</label>
+									<div class="col-sm-9">
+                                        {{key23.city}}
+									</div>
+								</div>
+								<div class="form-group address-field validate-state" id="billing_state_field">
+									<label for="billing_state" class="col-sm-3 control-label">
+										<span class="grey">State:</span>
+									</label>
+									<div class="col-sm-9">
+                                        {{key23.state}}
+									</div>
+								</div>
+								<div class="form-group address-field validate-required validate-postcode" id="billing_postcode_field">
+									<label for="billing_postcode" class="col-sm-3 control-label">
+										<span class="grey">Postcode:</span>
+										<span class="required">*</span>
+									</label>
+									<div class="col-sm-9">
+                                        {{key23.postalcode}}
+
+									</div>
+								</div>
+
+								<div class="form-group validate-required validate-email" id="billing_email_field">
+									<label for="billing_email" class="col-sm-3 control-label">
+										<span class="grey">Email Address:</span>
+										<span class="required">*</span>
+									</label>
+									<div class="col-sm-9">
+                                        {{request.session.email}}
+									</div>
+								</div>
+								<div class="form-group validate-required validate-phone" id="billing_phone_field">
+									<label for="billing_phone" class="col-sm-3 control-label">
+										<span class="grey">Phone:</span>
+										<span class="required">*</span>
+									</label>
+									<div class="col-sm-9">
+                                        {{key23.contact}}
+									</div>
+								</div>
+								
+							</form>
+
+						</div>
+{% endif %}
+
+						<aside class="col-sm-5 col-md-4 col-lg-3 col-sm-pull-7 col-md-pull-8 col-lg-pull-9">
+							{% if key22 %}
+							<h3 class="widget-title" id="order_review_heading">Your order</h3>
+							<div id="order_review" class="shop-checkout-review-order">
+								<table class="table shop_table shop-checkout-review-order-table">
+									<thead>
+										<tr>
+											<td class="product-name">Product</td>
+											<td class="product-total">Total</td>
+										</tr>
+									</thead>
+									<tbody>
+										
+                                        {% for i in key22 %}
+										{% if i.payment_status == 'pending' %}
+										<tr class="cart_item">
+											<td class="product-name">
+												{{i.rp_id.rproduct_name}}
+												<span class="product-quantity">× {{i.cart_quantity}}</span>
+											</td>
+											<td class="product-total">
+												<span class="amount grey">{{i.cart_subtotal}}</span>
+											</td>
+										</tr>
+										{% endif %}
+                                        {% endfor %}
+									</tbody>
+									<tfoot>
+
+										<tr class="cart-subtotal">
+											<td>Subtotal:</td>
+											<td>
+												<span class="amount grey">₹{{total}}</span>
+											</td>
+										</tr>
+
+										<tr class="shipping">
+											<td>Shipping:</td>
+											<td>
+												<span class="grey">Free Shipping</span>
+											</td>
+										</tr>
+
+										<tr class="order-total">
+											<td>Total:</td>
+											<td>
+												<span class="amount grey">
+													<strong>₹{{total}}</strong>
+												</span>
+											</td>
+										</tr>
+									</tfoot>
+    
+								</table>
+								<form action="{% url 'pay' %}" method="post">
+									{% csrf_token %}
+									{% for j in key22 %}
+									<input type="hidden" name="cid" value="{{j.cust_id.id}}">
+									<input type="hidden" name="cartid" value="{{j.id}}">
+									<input type="hidden" name="proid" value="{{j.rp_id.id}}">
+									<input type="hidden" name="cqty" value="{{j.cart_quantity}}">
+
+									{% endfor %}
+									
+									<textarea name="instructions" placeholder="Delivery Instructions...." cols="30" rows="10"></textarea>
+									
+									<input type="hidden" name="total" value="{{total}}">
+									<button class="theme_button color1">checkout</button>
+								</form>					
+							</div>
+							{% else %}
+							
+							{% endif %}
+						</aside>
+
+
+					</div>
+				</div>
+			</section>
+
+{% endblock %}

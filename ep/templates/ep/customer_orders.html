@@ -1,0 +1,157 @@
+{% extends 'ep/base3.html' %}
+{% block content %}
+
+<section class="page_breadcrumbs ds parallax section_padding_top_65 section_padding_bottom_65">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <h2 class="highlight">{{request.session.Firstname}} {{request.session.Lastname}}</h2>
+                <ol class="breadcrumb darklinks">
+                    <li>
+                        <a href="{% url 'index2' %}">
+                Home
+            </a>
+                    </li>
+                    
+                    <li class="active">Orders</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid">
+                        <h3>Orders</h3>
+                       
+    {% load ep_extras %}                    
+   
+
+                            <div class="card mb-4">
+                                <div class="text-lg-right">
+                                    <div class="widget widget_search">
+                                        
+                                        <form method="GET" action="{% my_url order.number 'page' request.GET.urlencode %}">
+                                        <input list="brow" name="status" onchange="form.submit();" style="width: auto; float: left;height: 50px;" placeholder="Select Order Status">
+                                        <datalist id="brow"  style="height: fit-content;">
+                                            <option value="Shipped">Shipped</option>
+                                                <option value="Order Placed">Order Placed</option>
+                                                <option value="Out of Delivery">Out of Delivery</option>
+												<option value="Delivered">Delivered</option>
+                                        </datalist>
+                                            <div class="form-group">
+                                                <label class="sr-only" for="widget-search">Search for:</label>
+                                                <input id="widget-search" type="text" style="width: auto; float: right;" value="" name="search" class="form-control" placeholder="Search Keyword">
+                                            </div>
+                                            <button class="theme_button color2"  style="padding: 10px 20px;">Search</button>
+
+                                        </form>
+                                    </div>
+
+                                </div>
+                                <div class="card-body" >
+                                    <div class="table-responsive">
+                                        <table class="table_template darklinks" id="timetable"   width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Sr. No.</th>
+                                                    <th>Order</th>
+                                                    <th>Order Date</th>
+                                                    <th>Order Status</th>
+                                                    <th>Payment Status</th>
+                                                    <th>Comments</th>
+                                                    <th>Invoices</th>
+                                                </tr>
+                                            </thead>
+                                            
+                                            <tbody>
+                                                {% if order %}
+                                                {% for i in order %}
+                                                
+                                                <tr>
+                                                    <td>{{order.start_index|add:forloop.counter0 }}</td>
+                                                    <td><a href="{% url 'prodesc' pk=i.rp_id.id %}" style="color:#54be73;">
+                                                        {{i.rp_id.rproduct_name}}
+                                                    </a></td>
+                                                    <td>{{i.order_date|date:"Y-m-d"}}</td>
+                                                    <td>{{i.order_status}}</td>
+                                                    {% if i.payment_status == 'TXN_SUCCESS' %}
+                                                    <td>Completed</td>
+                                                    {% else %}
+                                                    <td>Failed</td>
+                                                    {% endif %}
+                                                    <td>{{i.order_comment}}</td>                    
+                                                    <td>
+                                                        {% if i.payment_status == 'TXN_SUCCESS' %}
+                                                        <a href="{% url 'invoice' pk=i.id %}" class="theme_button color1">Invoice</a>  
+                                                        {% endif %}                                 
+                                                    </td>
+                                                </tr>
+                                                {% endfor %}
+                                                {% else %}
+                                                <tr>
+                                                    <td colspan="7">No Records</td>
+                                                </tr>
+                                                {% endif %}
+                                                
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            
+                                            <ul class="pagination highlightlinks">
+                                            
+                                                {% if order.has_previous %}
+                                                <li>
+                                                    <a href="{% my_url 1 'page' request.GET.urlencode %}">
+                                                        <span>First</span>
+                                                    </a>
+                                                </li>
+                                                <li class="text-md-left">
+                                                    
+                                                    <a href="{% my_url order.previous_page_number 'page' request.GET.urlencode %}">
+                                                        <span class="sr-only">Prev</span>
+                                                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                                                    </a>
+                                                    {% endif %}
+                                                </li>
+                                                
+                                               
+                                                {% for c in page.page_range %}
+                                                    {% if order.number == c %}
+                                                        <li class="active"><span>{{ c }} <span class="sr-only">(current)</span></span></li>
+                                                    {% elif c > order.number|add:'-3' and c < order.number|add:'3' %}
+                                                        <li><a href="{% my_url c 'page' request.GET.urlencode %}" >{{ c }}</a></li>
+                                                    {% endif %}
+                                                {% endfor %}
+                                                {% if order.has_next %}
+                                                <li>
+                                                    <a href="{% my_url order.next_page_number 'page' request.GET.urlencode %}">
+                                                        <span class="sr-only">Next</span>
+                                                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>	
+                                                <li>
+                                                    <a href="{% my_url page.num_pages 'page' request.GET.urlencode %}">
+                                                        <span>Last</span>
+                                                    </a>
+                                                </li>
+                                                {% endif %}
+                                                
+                                            </ul>
+                                            
+                                        </div>
+                                        <div class="col-md-6 text-md-right">
+                                            Showing {{order.start_index}} to {{order.end_index}} of {{page.count}} items
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </main>   
+            </div>
+
+{% endblock %}
+

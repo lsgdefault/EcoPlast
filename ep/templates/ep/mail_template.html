@@ -1,0 +1,48 @@
+  
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>This is mail template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+{% if data %}
+   <p>Hello {{data.name}},</p> 
+   <p>Your otp for registration is : {{data.otp}}</p>
+   <p>Please click here to verify :</p>
+  <a href="http://127.0.0.1:8000/otp/">verification link</a>
+{% endif %}
+{% if request %}
+   <p>Plastic Collecter: {{request.pcname}},</p> 
+   <p>Requested Plastic : {{request.productname}}</p>
+   <p>Requested Quantity :{{request.requestqty}}</p>
+   <p>Date of Request :{{request.requestdate}}</p>
+{% endif %}
+{% if showrequest %}
+   <p>Recycling Company:Name : {{showrequest.rcname}},</p> 
+   <p>Requested Plastic : {{showrequest.productname}}</p>
+   <p>Requested Quantity :{{showrequest.requestqty}}</p>
+   <p>Date of Request :{{showrequest.requestdate}}</p>
+{% endif %}
+{% if acceptreq %}
+   <p>Plastic Collecter: {{acceptreq.pcname}},</p> 
+   <p>Requested Plastic : {{acceptreq.productname}}</p>
+   <p>Requested Quantity :{{acceptreq.requestqty}}</p>
+   <p>Date of Request :{{acceptreq.requestdate}}</p>
+{% endif %}
+{% if pickupsent %}
+   <p>Name: {{pickupsent.fullname}}</p>
+   <p>Phone Number: {{pickupsent.contact}}</p>
+   <p>Pickup Date & Time: {{pickupsent.pickup_datetime}}</p>
+   <p>Pickup Details: {{pickupsent.pickup_details}}</p>
+{% endif %}
+{% if pickupaccept %}
+   <p>Plastic Collector Name: {{pickupaccept.pcname}}</p>
+   <p>Phone Number: {{pickupaccept.pccontact}}</p>
+   <p>Pickup Date & Time: {{pickupaccept.pickup_datetime}}</p>
+   <p>Pickup Details: {{pickupaccept.pickup_details}}</p>
+{% endif %}
+</body>
+</html>

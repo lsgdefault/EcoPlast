@@ -1,0 +1,126 @@
+{% extends 'ep/base3.html' %}
+{% block content %}
+			<section class="page_breadcrumbs ds parallax section_padding_top_65 section_padding_bottom_65">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-12 text-center">
+							<h2 class="highlight">Products</h2>
+							<ol class="breadcrumb darklinks">
+								<li>
+									<a href="index.html">
+							Home
+						</a>
+								</li>
+								<li>
+									<a href="#">Shop</a>
+								</li>
+								<li class="active">Products</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+			</section>
+{% if key21 %}
+
+			<section class="ls section_padding_top_100 section_padding_bottom_100 columns_padding_25">
+				<div class="container">
+					<div class="row">
+
+						<div class="col-sm-12">
+
+							<div class="shop-sorting">
+
+								
+									
+									{% if msg %}
+											
+									<div class="alert alert-success" role="alert">
+										<button type="button" class="close" data-dismiss="alert">
+											<span aria-hidden="true">×</span>
+											<span class="sr-only">Close</span>
+										</button>
+										<strong>{{msg}}</strong>
+									</div>
+			
+									{% endif %}
+							
+									
+									
+									<div class="form-group select-group">
+										<select aria-required="true" id="date" name="date" class="choice empty form-control">
+											<option value="" disabled selected data-default>Default Sorting</option>
+											<option value="value">by Value</option>
+											<option value="date">by Date</option>
+											<option value="popular">by Popularity</option>
+										</select>
+										<i class="fa fa-angle-down theme_button" aria-hidden="true"></i>
+									</div>
+
+								
+
+							</div>
+
+							<div class="columns-3">
+								<li class="product type-product">	
+									<div class="vertical-item">
+										<div class="item-media with_background bottommargin_30">
+											<img src="{{MEDIA_URL}}{{ key21.rp_id.rproduct_image.url }}" alt="{{post.title}}" width="20%" height="20%">
+										</div>
+										<div class="item-content">
+											<h4 class="poppins bottommargin_10">
+												<a href="{% url 'prodesc' pk=key21.id %}">{{key21.rp_id.rproduct_name}}</a>
+											</h4>
+								<p class="price"> 
+									<ins>
+										₹<span class="amount">{{key21.rp_id.rproduct_price}}</span>
+									</ins>
+									{{key21.rp_id.company_id.comp_name}} 
+									
+									<form action="{% url 'updatecart' pk=key21.rp_id.id %}" method="post">
+										{% csrf_token %}
+								</p>
+								Enter Quantity
+									<input type="number" min="1" max="{{key21.rp_id.rproduct_quantity}}"class="product-quantity"  name="product_quantity">
+									<input type="hidden" name="atcprice" value="{{key21.rp_id.rproduct_price}}">
+									<input type="hidden" name="pid" value="{{i.id}}">
+									
+									<button class="theme_button color1" >Update Cart</button>
+                                    <a href="{% url 'showthecart' pk=request.session.id %}" >Cancel</a>
+
+									</div>	
+								</li>
+									</form>
+								
+						</div>
+							
+{% endif %}
+							<div class="row">
+								<div class="col-sm-12 text-center">
+									<ul class="pagination highlightlinks">
+										<li class="disabled">
+											<a href="#">
+												<span class="sr-only">Prev</span>
+												<i class="fa fa-angle-left" aria-hidden="true"></i>
+											</a>
+										</li>
+										<li class="active"><a href="#">1</a></li>
+										<li><a href="#">2</a></li>
+										<li><a href="#">3</a></li>
+										<li><a href="#">4</a></li>
+										<li>
+											<a href="#">
+												<span class="sr-only">Next</span>
+												<i class="fa fa-angle-right" aria-hidden="true"></i>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+
+						</div>
+
+					</div>
+				</div>
+			</section>
+{% endblock %}

@@ -1,0 +1,189 @@
+{% extends 'ep/base2.html' %}
+{% block content %}
+			<section class="ls with_bottom_border">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-6">
+							<ol class="breadcrumb darklinks">
+								<li>
+									<a href="#">Dashboard</a>
+								</li>
+								<li class="active">Request Plastic</li>
+							</ol>
+						</div>
+						<div class="col-md-6 text-md-right">
+							<span class="dashboard-daterangepicker">
+								<i class="fa fa-calendar"></i>
+								<span></span>
+								<i class="caret"></i>
+							</span>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="ls section_padding_top_50 section_padding_bottom_50 columns_padding_10">
+				<div class="container-fluid">
+
+					<form class="form-horizontal" action="{% url 'rprequest' pk=request.session.id  %}" method="post" enctype="multipart/form-data">
+						{% csrf_token %}
+						{% if msg %}
+								
+							<strong><p style="color: green;">{{msg}}</p></strong>
+
+						{% endif %}
+						<div class="row">
+							<div class="col-md-8">
+								<div class="with_border with_padding">
+                                    
+									<h4>
+										Request Plastic
+										
+									</h4>
+									<hr>
+									<div class="row form-group">
+										
+										<input type="hidden" name="pc_id" id="" value="{{key12.plasticc_id.id}}">	
+                                    </div>
+                                    <div class="row form-group">
+										<label class="col-lg-3 control-label">Recycling Company Id: </label>
+										<div class="col-lg-9">
+											{{request.session.id}}
+										</div>
+                                    </div>
+									<div class="row form-group">
+										<label class="col-lg-3 control-label">Product ID: </label>
+										<div class="col-lg-9">
+											<input type="hidden" name="pid" value="{{key12.id}}">
+											{{key12.id}}
+										</div>
+									</div>
+									<div class="row form-group">
+										<label class="col-lg-3 control-label">Product Name: </label>
+										<div class="col-lg-9">
+                                            {{key12.pproduct_name}}
+										</div>
+									</div>
+									<div class="row form-group">
+										<label class="col-lg-3 control-label">Date: </label>
+										<div class="col-lg-9">
+											<input type="date" name="rdate" class="form-control">
+										</div>
+									</div>
+
+									<div class="row form-group admin-product-price">
+										<label class="col-lg-3 control-label">Product Price: </label>
+										<div class="col-lg-9">
+                                            {{key12.pproduct_price}} 
+										</div>
+									</div>
+									<div class="row form-group">
+										<label class="col-lg-3 control-label">Product Quantity: </label>
+										<div class="col-lg-9">
+											<input type="number" name="rqty" min="1" max="{{key12.pproduct_quantity}}"value="{{key12.pproduct_quantity}}">
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-sm-12 text-right">
+											<button type="submit" class="theme_button wide_button">Add Request</button>
+											<a href="" class="theme_button inverse wide_button">Cancel</a>
+										</div>
+									</div>
+                                
+								</div>
+
+							</div>
+						</div>
+
+
+					</form>
+
+				</div>
+			</section>
+
+			<section class="page_copyright ds darkblue_bg_color">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-sm-6">
+							<p class="grey">&copy; Copyrights 2017</p>
+						</div>
+						<div class="col-sm-6 text-sm-right">
+							<p class="grey">Last account activity <i class="fa fa-clock-o"></i> 52 mins ago</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+		</div>
+	</div>
+	<div class="side-dropdown side-chat dropdown">
+		<a class="side-button side-chat-button" id="chat-dropdown" data-target="#" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+			<i class="fa fa-comments-o"></i>
+		</a>
+
+		<ul class="dropdown-menu list-unstyled" aria-labelledby="chat-dropdown">
+			<li class="dropdown-title darkgrey_bg_color">
+				<h4>
+					Small Chat
+					<span class="pull-right">14.03.2017</span>
+				</h4>
+			</li>
+			<li>
+
+				<ul class="list-unstyled">
+					<li class="side-chat-item item-secondary">
+						<h5>
+							Michael Anderson
+							<time class="pull-right small-chat-date" datetime="2017-03-13T08:50:40+00:00">
+								08:50
+							</time>
+						</h5>
+						<div class="danger_bg_color">
+							Duis autem veum iriure dolor in hendrerit
+						</div>
+					</li>
+					<li class="side-chat-item item-primary">
+						<h5>
+							Jane Walker
+							<time class="pull-right small-chat-date" datetime="2017-03-13T08:50:40+00:00">
+								08:52
+							</time>
+						</h5>
+						<div class="warning_bg_color">
+							Vulputate vese molestie consequatl illum
+						</div>
+					</li>
+					<li class="side-chat-item item-secondary">
+						<h5>
+							Michael Anderson
+							<time class="pull-right small-chat-date" datetime="2017-03-13T08:50:40+00:00">
+								08:50
+							</time>
+						</h5>
+						<div class="danger_bg_color">
+							Duis autem veum iriure dolor in hendrerit
+						</div>
+					</li>
+				</ul>
+			</li>
+
+
+			<li role="separator" class="divider"></li>
+
+			<li>
+				<div class="side-chat-answer">
+					<form class="form-inline button-on-input">
+						<div class="form-group">
+							<label for="side-chat-message" class="sr-only">Message</label>
+							<input type="text" class="form-control" id="side-chat-message" placeholder="Message">
+						</div>
+						<button type="submit" class="btn btn-danger">
+							<i class="fa fa-paper-plane-o"></i>
+						</button>
+					</form>
+				</div>
+			</li>
+		</ul>
+	</div>
+{% endblock %}

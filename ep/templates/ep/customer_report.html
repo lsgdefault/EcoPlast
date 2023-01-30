@@ -1,0 +1,204 @@
+{% extends 'ep/base3.html' %}
+{% block content %}
+			<section class="page_breadcrumbs ds parallax section_padding_top_65 section_padding_bottom_65">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-12 text-center">
+							<h2 class="highlight">{{request.session.Firstname}} {{request.session.Lastname}}</h2>
+							<ol class="breadcrumb darklinks">
+								<li>
+									<a href="{% url 'index2' %}">
+							Home
+						</a>
+								</li>
+								<li>
+									<a href="">Reports</a>
+								</li>
+								<li class="active">View</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+			</section>
+
+{% load ep_extras %}
+			<section class="ls section_padding_100">
+				<div class="container">
+					
+					<div class="row">
+						<div class="col-sm-12">
+							<h1 class="divider_40">Plastic &nbsp; Selling &nbsp; Reports&nbsp; :</h1>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-3 col-sm-6">
+
+							<div class="teaser text-center">
+								<div class="teaser_icon grey size_big">
+									<i class="rt-icon2-stack" style="color:green;"></i>
+								</div>
+								<h3 class="counter-wrap highlight" data-from="0" data-to="40" data-speed="1800">
+									<span class="counter" data-from="0" data-to="{{total.count}}" data-speed="1500">0</span>
+								</h3>
+								<p>Total Reports</p>
+							</div>
+
+						</div>
+
+						<div class="col-md-3 col-sm-6">
+
+							<div class="teaser text-center">
+								<div class="teaser_icon grey size_big">
+									<i class="rt-icon2-layers" style="color:green;"></i>
+								</div>
+								<h3 class="counter highlight" data-from="0" data-to="{{totalcollection}}" data-speed="2100">0</h3>
+								<p>Total Collection </p><span>in KGs</span>
+							</div>
+
+						</div>
+
+
+						<div class="col-md-3 col-sm-6">
+
+							<div class="teaser text-center">
+								<div class="teaser_icon grey size_big">
+									<i class="fa fa-recycle " style="color:green;"></i>
+								</div>
+								<h3 class="counter highlight" data-from="0" data-to="{{t_usage}}" data-speed="1400">0</h3>
+								<p>Total Usage</p><span>in KGs</span>
+							</div>
+
+						</div>
+
+						<div class="col-md-3 col-sm-6">
+
+							<div class="teaser text-center">
+								<div class="teaser_icon grey size_big">
+									<i class="rt-icon2-trashcan" style="color:red;"></i>
+								</div>
+								<h3 class="highlight counter-wrap">
+									<span class="counter" data-from="0" data-to="{{t_waste}}" data-speed="1500">0</span>
+								</h3>
+								<p>Total Wastage</p><span>in KGs</span>
+							</div>
+							
+						</div>
+						<form  class="form-inline filters-form" method="GET">
+							&nbsp;&nbsp;&nbsp;
+							<input list="brow" name="pc_name"  placeholder="Select Plastic Collector">
+							<datalist id="brow"  style="height: fit-content;">
+								<option value="All">All</option> 
+								{% for r in plast %}
+								<option value="{{r.pc_name}}"></option>
+								{% endfor %}
+							</datalist>&nbsp;
+							Starting Date<input type="text" name="date" placeholder="YYYY-MM-DD" onfocus="(this.type='date')"onblur="(this.type='text')">
+							Ending Date<input type="text" name="date" placeholder="YYYY-MM-DD" onfocus="(this.type='date')"onblur="(this.type='text')">
+							<br><br>
+							<button class="theme_button color2" formaction="{% my_url report.number 'page' request.GET.urlencode %}" style="padding: 10px 20px;">Search</button>
+							
+						</form>
+						
+					</div>
+					
+                    <div class="row">
+                        
+						<table class="table_template darklinks" id="timetable">
+							<thead>
+                                <tr>
+                                    <th>Sr. No.</th>
+									<th>Date of Collection</th>
+                                    <th>Plastic Collector Name</th>
+                                    <th>Total Collection</th>
+                                    <th>Usage</th>
+                                    <th>Wastage</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+								{% if report %}
+                                {% for i in report %}
+                                <tr>
+                                
+                                    <td>{{report.start_index|add:forloop.counter0 }}</td>
+									<td>{{i.collection_date|date:"Y-m-d"}}</td>
+                                    <td>{{i.plastic_id.pc_name}}</td>
+                                    <td>{{i.total_collection}} KGs</td>
+                                    <td>{{i.usage}} KGs</td>
+                                    <td>{{i.wastage}} KGs</td>
+                                </tr>
+                                {% endfor %}
+								
+								{% else %}
+								<tr>
+									<td colspan="6">No Records</td>
+								</tr>
+								{% endif %}
+
+                            </tbody>
+						</table>
+                    </div>
+					<div class="row">
+						<div class="col-md-6">
+							
+							<ul class="pagination highlightlinks">
+							
+								{% if report.has_previous %}
+								<li>
+									<a href="{% my_url 1 'page' request.GET.urlencode %}">
+										<span>First</span>
+									</a>
+								</li>
+								<li class="text-md-left">
+									
+									<a href="{% my_url report.previous_page_number 'page' request.GET.urlencode %}">
+										<span class="sr-only">Prev</span>
+										<i class="fa fa-angle-left" aria-hidden="true"></i>
+									</a>
+									{% endif %}
+								</li>
+								
+								
+								{% for c in total.page_range %}
+									{% if report.number == c %}
+										<li class="active"><span>{{ c }} <span class="sr-only">(current)</span></span></li>
+									{% elif c > report.number|add:'-3' and c < report.number|add:'3' %}
+										<li><a href="{% my_url c 'page' request.GET.urlencode %}" >{{ c }}</a></li>
+									{% endif %}
+								{% endfor %}
+								{% if report.has_next %}
+								<li>
+									<a href="{% my_url report.next_page_number 'page' request.GET.urlencode %}">
+										<span class="sr-only">Next</span>
+										<i class="fa fa-angle-right" aria-hidden="true"></i>
+									</a>
+								</li>	
+								<li>
+									<a href="{% my_url total.num_pages 'page' request.GET.urlencode %}">
+										<span>Last</span>
+									</a>
+								</li>
+								{% endif %}
+								
+							</ul>
+							
+						</div>
+						<div class="col-md-6 text-md-right">
+							Showing {{report.start_index}} to {{report.end_index}} of {{total.count}} items
+						</div>
+
+					</div>
+					
+				</div>
+			</section>
+			
+
+{% endblock %}
+
+{% block script %}
+<script>
+	$(document).ready(function() {
+		var selected_option = $('.orderby').find('option[value={{filter}}]');
+		selected_option.attr('selected','selected').siblings().removeAttr('selected')
+	})
+</script>
+{% endblock %}

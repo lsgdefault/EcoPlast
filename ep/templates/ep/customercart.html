@@ -1,0 +1,170 @@
+{% extends 'ep/base3.html' %}
+{% block content %}
+			<section class="page_breadcrumbs ds parallax section_padding_top_65 section_padding_bottom_65">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-12 text-center">
+							<h2 class="highlight">Cart</h2>
+							<ol class="breadcrumb darklinks">
+								<li>
+									<a href="{% url 'index2' %}">
+							Home
+						</a>
+								</li>
+								<li>
+									<a href="{% url 'showpro' %}">Shop</a>
+								</li>
+								<li class="active">Cart</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="ls section_padding_top_100 section_padding_bottom_75 columns_padding_25">
+				<div class="container">
+					<div class="row">
+						<div class="">
+							{% if msg %}
+							<div class="alert alert-danger" role="alert">
+								<button type="button" class="close" data-dismiss="alert">
+									<span aria-hidden="true">×</span>
+									<span class="sr-only">Close</span>
+								</button>
+								<strong>{{msg}}</strong>
+							</div>
+							{% endif %}
+							<div class="table-responsive">
+								<table class="table shop_table cart cart-table">
+									<thead>
+										<tr>
+											<th class="product-info">Product</th>
+											<th class="product-price-td">Price</th>
+											<th class="product-quantity">Quantity</th>
+											<th class="product-subtotal">Subtotal</th>
+											<th class="product-remove">Remove Item</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% if key20 %}
+										{% for i in key20 %}
+									
+										<tr class="cart_item">
+											<td class="product-info">
+												<div class="media">
+													<div class="media-left">
+														<a href="shop-product-right.html">
+															<img class="media-object cart-product-image" src="images/shop/01.png" alt="">
+														</a>
+													</div>
+													<div class="media-body">
+														<h4 class="media-heading">
+														
+															<a href="{% url 'prodesc' pk=i.id %}">{{i.rp_id.rproduct_name}}</a>
+														
+														</h4>
+
+														<small><span class="grey"> Recycling Company:</span> {{i.rp_id.company_id.comp_name}}</small>
+														<br>
+													</div>
+												</div>
+											</td>
+											<td class="product-price">
+												
+												<span class="currencies">₹</span>
+												<span class="amount">{{i.rp_id.rproduct_price}}</span>
+											</td>
+											
+											<td class="product-quantity">
+												<form action="{% url 'updatecart' pk=i.id %}" method="post">
+													{% csrf_token %}
+												<div class="quantity">
+													<input type="button" value="-"  name="product_quantity" class="minus">
+													<input type="number" class="product_qty_update" step="1" min="1" max="{{i.rp_id.rproduct_quantity}}" onchange="form.submit()" name="product_quantity" value="{{i.cart_quantity}}" title="Quantity">
+													<input type="button" value="+" name="product_quantity" class="plus">
+													<input type="hidden" name="rcp" value = {{i.rp_id.id}}>
+												</form>
+												</div>
+											</td>
+											
+											<td class="product-subtotal">
+												<span class="currencies">₹</span>
+												<span class="amount">{{i.cart_subtotal}}</span>
+											</td>
+											
+											<td class="product-remove">
+												<form action="{% url 'deletecart' pk=i.id %}" method="post">
+													{% csrf_token %}
+												<input type="hidden" name="rcp" value = {{i.rp_id.id}}>
+												<input type="hidden" name="product_quantity" value="{{i.cart_quantity}}">
+												<button class="theme_button"  style="height: 5px; padding-top: 10px;"><i  class="fa fa-trash-o" ></i></button>
+											</td>
+										</form>
+										</tr>
+										
+										{% endfor %}
+										{% else %}
+										<tr>
+											<td colspan="5">
+												<center>Your Cart is Empty! <i class="fa fa-shopping-cart"></i></center>
+											</td>
+										</tr>
+										
+										{% endif %}										
+										
+									</tbody>
+								</table>
+							</div>
+							<center>
+							<div class="cart-buttons">
+								<a class="theme_button color1" href="{% url 'showpro' %}">Countinue Shopping</a>		
+								{% if key20 %}
+								<a href="{% url 'checkout' pk=request.session.id %}" class="theme_button color2">Proceed to Checkout</a>
+								{% endif %}
+							</div>
+						</center>
+							<div class="cart-collaterals">
+								<div class="cart_totals">
+									<h4>Cart Totals</h4>
+									<table class="table">
+										<tbody>
+											<tr class="cart-subtotal">
+												<td>Cart Total</td>
+												<td>
+													<span class="currencies">₹</span>
+													<span class="amount">{{total}}</span>
+												</td>
+											</tr>
+											<tr class="shipping">
+												<td>Shipping and Handling</td>
+												<td>
+													Free Shipping
+												</td>
+											</tr>
+											<tr class="order-total">
+												<td class="grey">Order Total</td>
+												<td>
+													<strong class="grey">
+														<span class="currencies">₹</span>
+														<span class="amount">{{total}}</span>
+													</strong>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						
+							
+
+						</div>
+					
+					</div>
+				</div>
+			</section>
+
+{% endblock %}
+{% block scripts %}
+
+
+{% endblock %}
