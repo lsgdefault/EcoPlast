@@ -28,8 +28,9 @@ This is to inform you that to run this project you need to create "Virtual Envir
 The following steps will guide you to create and import database in mysql
 
 To Import Database:
-Step 1- create Database Named ecoplast
-Step 2- import Database\Ecoplast.sql
+
+	Step 1- create Database Named ecoplast
+	Step 2- import Database\Ecoplast.sql
 
 The following steps will guide you to create Virtutal Environment and this code should be executed in cmd and directory will be the folder in which you stored this project.
 	
@@ -37,10 +38,10 @@ For instance, my directory is E:\FPD
 
 **Note: You Must have Installed Python and Django In Your Device**
 
-Step 1: creating virtutal environment as myvenv:- D:\Python\Django\EcoPlast>python -m venv myvenv 
-Step 2: activating virtual environment:- D:\Python\Django\EcoPlast>myvenv\Scripts\activate
-Step 3: installing requirement files to run this project:- (myvenv) D:\Python\Django\EcoPlast>pip install -r requirements.txt
-Step 4: project on server:- (myvenv) D:\Python\Django\EcoPlast>python manage.py runserver
+	Step 1: creating virtutal environment as myvenv:- D:\Python\Django\EcoPlast>python -m venv myvenv 
+	Step 2: activating virtual environment:- D:\Python\Django\EcoPlast>myvenv\Scripts\activate
+	Step 3: installing requirement files to run this project:- (myvenv) D:\Python\Django\EcoPlast>pip install -r requirements.txt
+	Step 4: project on server:- (myvenv) D:\Python\Django\EcoPlast>python manage.py runserver
 
 The above mentioned requirements.txt file is already provided with project.
 
