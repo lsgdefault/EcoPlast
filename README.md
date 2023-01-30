@@ -9,13 +9,13 @@ EcoPlast is a comprehensive platform that brings together customers, plastic col
 # Features
 
 	•Connects customers, plastic collectors, recycling companies, and product sellers in a single platform
-  •Provides an eco-friendly solution for customers to dispose of their plastic waste
-  •Offers earning opportunities for plastic collectors
-  •Secures a steady source of raw materials for recycling companies
-  •Allows product sellers to purchase recycled plastic products for resale
-  •Supports a circular economy and reduces the impact of plastic waste on the environment
-  •User-friendly interface for easy navigation and transactions
-  •Efficient and secure management of user data, transactions, and other critical aspects using Django framework.
+  	•Provides an eco-friendly solution for customers to dispose of their plastic waste
+  	•Offers earning opportunities for plastic collectors
+  	•Secures a steady source of raw materials for recycling companies
+  	•Allows product sellers to purchase recycled plastic products for resale
+  	•Supports a circular economy and reduces the impact of plastic waste on the environment
+  	•User-friendly interface for easy navigation and transactions
+  	•Efficient and secure management of user data, transactions, and other critical aspects using Django framework.
 
 
 # Tech Used
